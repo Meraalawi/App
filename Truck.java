@@ -1,29 +1,32 @@
 public class Truck extends Vehicle {
-    private double FreeWight;
-    private double FullWight;
+    private double freeWeight;
+    private double fullWeight;
 
     public Truck() {
-        this.FreeWight = 0.0;
-        this.FullWight = 0.0;
-    }  
-    public Truck(double FreeWight,double FullWight) {
-        this.FreeWight=FreeWight;
-        this.FullWight=FullWight;
-    }
-        
-    public double getFreeWight() {
-        return this.FreeWight;
+        super(0.0, 0.0, null);
+        this.freeWeight = 0.0;
+        this.fullWeight = 0.0;
     }
 
-    public void setFreeWight(double freeWight) {
-        this.FreeWight = freeWight;
+    public Truck(double freeWeight, double fullWeight, double width, double length, Color color) {
+        super(width, length, color);
+        this.freeWeight = freeWeight;
+        this.fullWeight = fullWeight;
     }
 
-    public double getFullWight() {
-        return this.FullWight;
+    public double getFreeWeight() {
+        return this.freeWeight;
     }
 
-    public void setFullWight(double fullWight) {
-        this.FullWight = fullWight;
+    public void setFreeWeight(double freeWeight) {
+        this.freeWeight = freeWeight;
+    }
+
+    public double getFullWeight() {
+        return this.fullWeight;
+    }
+
+    public void setFullWeight(double fullWeight) {
+        this.fullWeight = fullWeight;
     }
 }
