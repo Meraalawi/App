@@ -1,29 +1,40 @@
 class Vehicle extends Automobile {
-    private double Width;
-    private double Length;
-    private Color Color;
+    private double width;
+    private double length;
+    private Color color;
 
-    public double getWidth() {
-        return Width;
+    public Vehicle(){
+        this.width = 0.0;
+        this.length = 0.0;
+        this.color = null;
+    }
+    public Vehicle(double width, double length, Color color) {
+        this.width = width;
+        this.length = length;
+        this.color = color;
     }
 
-    public void setWidth(double Width) {
-        this.Width = Width;
+    public double getWidth() {
+        return width;
+    }
+
+    public void setWidth(double width) {
+        this.width = width;
     }
 
     public double getLength() {
-        return Length;
+        return length;
     }
 
-    public void setLength(double Length) {
-        this.Length = Length;
+    public void setLength(double length) {
+        this.length = length;
     }
 
     public Color getColor() {
-        return Color;
+        return color;
     }
 
-    public void setColor(Color Color) {
-        this.Color = Color;
+    public void setColor(Color color) {
+        this.color = color;
     }
 }
