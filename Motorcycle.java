@@ -1,28 +1,35 @@
-public class Motorcycle extends Automobile{
-    private double TierDiameter;
-    private double Length;
+import java.util.Date;
 
-    public Motorcycle(){
-        this.TierDiameter = 0.0; 
-        this.Length= 0.0; 
+public class Motorcycle extends Automobile {
+    private double tireDiameter;
+    private double length;
+
+    public Motorcycle() {
+        super(null, new Date(), null, 0, null, null, 0);
+        this.tireDiameter = 0.0;
+        this.length = 0.0;
     }
-    public Motorcycle(double TierDiameter, double Length) {
-        this.TierDiameter = TierDiameter;
-        this.Length = Length;
+
+    public Motorcycle(double tireDiameter, double length, Engine engine, Color color, double width, int plateNumber, FuelType fuelType, GearType gearType, int serialNumber, String manufacture, Date manufactureDate) {
+        super(manufacture, manufactureDate, engine, plateNumber, fuelType, gearType, serialNumber);
+        this.tireDiameter = tireDiameter;
+        this.length = length;
     }
+
+
     public double getTireDiameter() {
-    return TierDiameter;
-}
+        return tireDiameter;
+    }
 
-    public void setTireDiameter(double TierDiameter) {
-        this.TierDiameter = TierDiameter;
+    public void setTireDiameter(double tireDiameter) {
+        this.tireDiameter = tireDiameter;
     }
 
     public double getLength() {
-        return Length;
+        return length;
     }
 
-    public void setLength(double Length) {
-        this.Length = Length;
+    public void setLength(double length) {
+        this.length = length;
     }
 }
