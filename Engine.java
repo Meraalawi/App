@@ -1,36 +1,58 @@
-import java.sql.Date;
+import java.util.Date;
 
 public class Engine {
-    private String Manufacture;
-    private Date ManufactureDate;
-    private String Model;
-    private int Capacity;
-    private int Cylinder;
-    private FuelType FuelType;
+    private String manufacture;
+    private Date manufactureDate;
+    private String model;
+    private int capacity;
+    private int cylinder;
+    private FuelType fuelType;
 
     public String getManufacture() {
-        return Manufacture;
-    }
-    public void setManufacture(String Manufacture) {
-        this.Manufacture = Manufacture;
-    }
-    public Date getManufactureDate() {
-        return ManufactureDate;
-    }
-    public void setManufactureDate(Date ManufactureDate) {
-        this.ManufactureDate = ManufactureDate;
+        return manufacture;
     }
 
-    public String getModel(){
-        return Model;
+    public void setManufacture(String manufacture) {
+        this.manufacture = manufacture;
     }
-    public int getCapcity(){
-        return Capacity;
+
+    public Date getManufactureDate() {
+        return manufactureDate;
     }
-    public int getCylinder(){
-        return Cylinder;
+
+    public void setManufactureDate(Date manufactureDate) {
+        this.manufactureDate = manufactureDate;
     }
-    public FuelType getFuelType(){
-        return FuelType;
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public int getCylinder() {
+        return cylinder;
+    }
+
+    public void setCylinder(int cylinder) {
+        this.cylinder = cylinder;
+    }
+
+    public FuelType getFuelType() {
+        return fuelType;
+    }
+
+    public void setFuelType(FuelType fuelType) {
+        this.fuelType = fuelType;
     }
 }
