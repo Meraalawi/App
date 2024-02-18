@@ -1,5 +1,5 @@
 enum GearType {
-    NotDefine,
+    NOT_DEFINE,
     NORMAL,
     AUTOMATIC;
 }

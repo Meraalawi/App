@@ -1,10 +1,10 @@
 enum Color {
-    NotDefine,
-    Red,
-    White,
-    Black,
-    Blue,
-    Green,
-    Yellow;
+    NOT_DEFINE,
+    RED,
+    WHITE,
+    BLACK,
+    BLUE,
+    GREEN,
+    YELLOW;
 
 }

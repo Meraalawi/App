@@ -1,7 +1,7 @@
 enum FuelType {
-    NotDefine, 
-    Diesel,
-    Gasoline,
-    Hybrid;
-
+    NOT_DEFINE, 
+    DIESEL,
+    GASOLINE,
+    HYBIRD,
+    ELCTRIC;
 }
