@@ -1,13 +1,15 @@
-public class Car {
+public class Car extends Vehicle {
     private int chairNumber;
     private boolean isFurnitureLeather;
 
-    public Car(){
+    public Car() {
+        super(0.0, 0.0, null);
         this.chairNumber = 0;
         this.isFurnitureLeather = true;
     } 
     
-    public Car(int chairNumber, boolean isFurnitureLeather) {
+    public Car(int chairNumber, boolean isFurnitureLeather, double width, double length, Color color) {
+        super(width, length, color);
         this.chairNumber = chairNumber;
         this.isFurnitureLeather = isFurnitureLeather;
     }
@@ -20,11 +22,11 @@ public class Car {
         this.chairNumber = chairNumber;
     }
 
-    public boolean isFurnitureLeather() {
+    public boolean getIsFurnitureLeather() {
         return isFurnitureLeather;
     }
 
-    public void setFurnitureLeather(boolean furnitureLeather) {
-        isFurnitureLeather = furnitureLeather;
+    public void setIsFurnitureLeather(boolean isFurnitureLeather) {
+        this.isFurnitureLeather = isFurnitureLeather;
     }
 }
