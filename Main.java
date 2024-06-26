@@ -6,11 +6,17 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
+        
         List<Car> cars = new ArrayList<>();
         List<Truck> trucks = new ArrayList<>();
         List<Motorcycle> motorcycles = new ArrayList<>();
 
+       Map<Integer, List<? extends Automobile>> automobileMap = new HashMap<>();
+       automobileMap.put(1, cars);
+       automobileMap.put(2, trucks);
+       automobileMap.put(3, motorcycles);
+
+        
         while (true) {
             System.out.println("Choose a list to work with:");
             System.out.println("1. Car list");
@@ -19,27 +25,21 @@ public class Main {
             System.out.println("4. Exit");
             int listChoice = scanner.nextInt();
 
-            switch (listChoice) {
-                case 1:
-                    performOperations(scanner, cars, listChoice);
-                    break;
-                case 2:
-                    performOperations(scanner, trucks,listChoice);
-                    break;
-                case 3:
-                    performOperations(scanner, motorcycles,listChoice);
-                    break;
-                case 4:
-                    System.out.println("Exiting program.");
-                    return;
-                default:
-                    System.out.println("Invalid choice. Please enter a number between 1 and 4.");
+            
+        }
+        List<? extends Automobile> selectedList = automobileMap.get(listChoice);
+
+            if (selectedList == null) {
+                System.out.println("Invalid choice.");
+            } else {
+                performOperations(selectedList);
             }
         }
+    
     }
 
 
-    private static <T extends Automobile> void performOperations(Scanner scanner, List<T> selectedList, int listChoice) {
+    private static void performOperations( List<T> selectedList, int listChoice) {
         while (true) {
             System.out.println("Choose an operation:");
             System.out.println("1. Add a new vehicle");
@@ -53,8 +53,24 @@ public class Main {
 
             switch (operationChoice) {
                 case 1:
-                    addVehicle(scanner, selectedList,listChoice);
+                    addVehicle(selectedList);
                     break;
+                case 2:
+                    searchVehicle(selectedList);
+                    break;
+                case 3:
+                    deleteVehicle(selectedList);
+                    break;
+                case 4:
+                    modifyVehicle(selectedList);
+                    break;
+                case 5:
+                    return;
+                case 6:
+                    System.out.println("Exiting program.");
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid choice. Please enter a number between 1 and 6.");
             }
         }
     }
@@ -69,7 +85,7 @@ public class Main {
         }
     }
 
-    private static <T extends Automobile> void addVehicle(Scanner scanner, List<T> selectedList,int listChoice) {
+    private static void addVehicle(selectedList) {
         System.out.println("Adding a new vehicle...");
 
         System.out.print("Enter plate number: ");
@@ -92,15 +108,15 @@ public class Main {
         System.out.print("Enter length: ");
         double length = scanner.nextDouble();
         
-        if (listChoice == 1) {
+        if (selectedList.get instanceof Car) {
             System.out.print("Enter chair number: ");
             int chairNumber = scanner.nextInt();
             System.out.print("Is furniture leather? (true/false): ");
             boolean isFurnitureLeather = scanner.nextBoolean();
-            Car newCar = new Car(chairNumber, isFurnitureLeather, width, length, color);
-            selectedList.add((T) newCar);
+            Car newCar = new Car(plateNumber, serialNumber, color, manufacturer, manufactureDate, fuelType, gearType, width, length, chairNumber, isFurnitureLeather);
+            ((List<Car>) selectedList).add(newCar);
             System.out.println("Car added successfully.");
-        }
+        
     }
 }   
             
