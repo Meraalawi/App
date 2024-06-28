@@ -3,20 +3,19 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Main {
-
     public static void main(String[] args) {
+        
         Scanner scanner = new Scanner(System.in);
-        
-        List<Car> cars = new ArrayList<>();
-        List<Truck> trucks = new ArrayList<>();
-        List<Motorcycle> motorcycles = new ArrayList<>();
 
-       Map<Integer, List<? extends Automobile>> automobileMap = new HashMap<>();
-       automobileMap.put(1, cars);
-       automobileMap.put(2, trucks);
-       automobileMap.put(3, motorcycles);
+        ArrayList<Car> cars = new ArrayList<>();
+        ArrayList<Truck> trucks = new ArrayList<>();
+        ArrayList<Motorcycle> motorcycles = new ArrayList<>();
 
-        
+        Map<Integer, Object> automobileMap = new HashMap<>();
+        automobileMap.put(1, cars);
+        automobileMap.put(2, trucks);
+        automobileMap.put(3, motorcycles);
+
         while (true) {
             System.out.println("Choose a list to work with:");
             System.out.println("1. Car list");
@@ -24,22 +23,23 @@ public class Main {
             System.out.println("3. Motorcycle list");
             System.out.println("4. Exit");
             int listChoice = scanner.nextInt();
+            scanner.nextLine();
 
-            
-        }
-        List<? extends Automobile> selectedList = automobileMap.get(listChoice);
-
-            if (selectedList == null) {
+            if (listChoice == 4) {
+                System.out.println("Exiting program.");
+                break;
+            }
+            if (!automobileMap.containsKey(listChoice)) {
                 System.out.println("Invalid choice.");
             } else {
-                performOperations(selectedList);
+                performOperations(listChoice);
             }
         }
-    
     }
 
+    private static void performOperations(int listChoice) {
+        Scanner scanner = new Scanner(System.in);
 
-    private static void performOperations( List<T> selectedList, int listChoice) {
         while (true) {
             System.out.println("Choose an operation:");
             System.out.println("1. Add a new vehicle");
@@ -53,7 +53,7 @@ public class Main {
 
             switch (operationChoice) {
                 case 1:
-                    addVehicle(selectedList);
+                    addVehicle(automobileMap.get(listChoice));
                     break;
                 case 2:
                     searchVehicle(selectedList);
@@ -65,7 +65,7 @@ public class Main {
                     modifyVehicle(selectedList);
                     break;
                 case 5:
-                    return;
+                    return; // Go back to choose another list
                 case 6:
                     System.out.println("Exiting program.");
                     System.exit(0);
@@ -74,7 +74,6 @@ public class Main {
             }
         }
     }
-
     private static Date parseDate(String dateStr) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
@@ -84,14 +83,14 @@ public class Main {
             return null;
         }
     }
-
-    private static void addVehicle(selectedList) {
+    private static void addVehicle(ArrayList listChoice) {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Adding a new vehicle...");
 
         System.out.print("Enter plate number: ");
         int plateNumber = scanner.nextInt();
         System.out.print("Enter serial number: ");
-        int serialNumbe = scanner.nextInt();
+        int serialNumber = scanner.nextInt();
         System.out.print("Enter color (RED, WHITE, BLACK, BLUE, GREEN, YELLOW): ");
         Color color = Color.valueOf(scanner.next().toUpperCase());
         System.out.print("Enter manufacturer: ");
@@ -107,8 +106,7 @@ public class Main {
         double width = scanner.nextDouble();
         System.out.print("Enter length: ");
         double length = scanner.nextDouble();
-        
-        if (selectedList.get instanceof Car) {
+        if (selectedList instanceof Car) {
             System.out.print("Enter chair number: ");
             int chairNumber = scanner.nextInt();
             System.out.print("Is furniture leather? (true/false): ");
@@ -118,7 +116,21 @@ public class Main {
             System.out.println("Car added successfully.");
         
     }
-}   
-            
+
+    }
+
+    private static void searchVehicle(List<? extends Automobile> listChoice) {
+        System.out.println("This is the searchVehicle method.");
+    }
+
+    private static void deleteVehicle(List<? extends Automobile> listChoice) {
+        System.out.println("This is the deleteVehicle method.");
+    }
+
+    private static void modifyVehicle(List<? extends Automobile> listChoice) {
+        System.out.println("This is the modifyVehicle method.");
+    }
+}
 
 
+                    
