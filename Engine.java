@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Engine {
@@ -54,5 +55,15 @@ public class Engine {
 
     public void setFuelType(FuelType fuelType) {
         this.fuelType = fuelType;
+    }
+    public void print() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        System.out.println("Engine Details:");
+        System.out.println("Manufacture: " + manufacture);
+        System.out.println("Manufacture Date: " + ( sdf.format(manufactureDate)));
+        System.out.println("Model: " + model);
+        System.out.println("Capacity: " + capacity );
+        System.out.println("Cylinders: " + cylinder);
+        System.out.println("Fuel Type: " + fuelType);
     }
 }
