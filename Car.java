@@ -1,3 +1,5 @@
+import java.text.SimpleDateFormat;
+
 public class Car extends Vehicle {
     private int chairNumber;
     private boolean isFurnitureLeather;
@@ -28,5 +30,21 @@ public class Car extends Vehicle {
 
     public void setIsFurnitureLeather(boolean isFurnitureLeather) {
         this.isFurnitureLeather = isFurnitureLeather;
+    }
+    public void print() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        System.out.println("Car Details:");
+        System.out.println("Width: " + getWidth());
+        System.out.println("Length: " + getLength());
+        System.out.println("Color: " + getColor());
+        System.out.println("Chair Number: " + chairNumber);
+        System.out.println("Is Furniture Leather: " + isFurnitureLeather);
+        System.out.println("Plate Number: " + getPlateNumber());
+        System.out.println("Serial Number: " + getSerialNumber());
+        System.out.println("Manufacturer: " + getManufacture());
+        System.out.println("Manufacture Date: " + (sdf.format(getManufactureDate())));
+        System.out.println("Fuel Type: " + getFuelType());
+        System.out.println("Gear Type: " + getGearType());
+        getEngine().print();
     }
 }
