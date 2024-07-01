@@ -4,22 +4,22 @@ public class Automobile {
     private String manufacture;
     private Date manufactureDate;
     private Engine engine;
-    private int plateNumber;
+    private String plateNumber;
     private FuelType fuelType;
     private GearType gearType;
-    private int serialNumber;
+    private String serialNumber;
 
     public Automobile() {
         this.manufacture = null;
         this.manufactureDate = new Date();
         this.engine = null;
-        this.plateNumber = 0;
+        this.plateNumber = null;
         this.fuelType = null;
         this.gearType = null;
-        this.serialNumber = 0;
+        this.serialNumber = null;
     }
 
-    public Automobile(String manufacture, Date manufactureDate, Engine engine, int plateNumber, FuelType fuelType, GearType gearType, int serialNumber) {
+    public Automobile(String manufacture, Date manufactureDate, Engine engine, String plateNumber, FuelType fuelType, GearType gearType, String serialNumber) {
         this.manufacture = manufacture;
         this.manufactureDate = manufactureDate;
         this.engine = engine;
@@ -53,11 +53,11 @@ public class Automobile {
         this.engine = engine;
     }
 
-    public int getPlateNumber() {
+    public String getPlateNumber() {
         return plateNumber;
     }
 
-    public void setPlateNumber(int plateNumber) {
+    public void setPlateNumber(String plateNumber) {
         this.plateNumber = plateNumber;
     }
 
@@ -77,11 +77,11 @@ public class Automobile {
         this.gearType = gearType;
     }
 
-    public int getSerialNumber() {
+    public String getSerialNumber() {
         return serialNumber;
     }
 
-    public void setSerialNumber(int serialNumber) {
+    public void setSerialNumber(String serialNumber) {
         this.serialNumber = serialNumber;
     }
 }
