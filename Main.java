@@ -113,8 +113,7 @@ public class Main {
                 int chairNumber = scanner.nextInt();
                 System.out.print("Is furniture leather? (true/false): ");
                 boolean isFurnitureLeather = scanner.nextBoolean();
-                Car newCar = new Car(plateNumber, serialNumber, color, manufacturer, manufactureDate, fuelType,
-                        gearType, width, length, chairNumber, isFurnitureLeather);
+                Car newCar = new Car();
                 ((ArrayList<Car>) automobileMap.get(listChoice)).add(newCar);
                 System.out.println("Car added successfully.");
                 break;
@@ -123,17 +122,14 @@ public class Main {
                 double fullWeight = scanner.nextDouble();
                 System.out.print("Enter free Weight capacity: ");
                 double freeWeight = scanner.nextDouble();
-                Truck newTruck = new Truck(plateNumber, serialNumber, color, manufacturer, manufactureDate, fuelType,
-                        gearType, width, length, freeWeight, fullWeight);
+                Truck newTruck = new Truck();
                 ((ArrayList<Truck>) (automobileMap.get(listChoice))).add(newTruck);
                 System.out.println("Truck added successfully.");
                 break;
             case 3:
                 System.out.print("Enter tire Diameter: ");
                 double tireDiameter = scanner.nextDouble();
-                System.out.print("Enter tire Diameter: ");
-                Motorcycle newMotorcycle = new Motorcycle(plateNumber, serialNumber, color, manufacturer,
-                        manufactureDate, fuelType, gearType, width, length, tireDiameter);
+                Motorcycle newMotorcycle = new Motorcycle();
                 ((ArrayList<Motorcycle>) automobileMap.get(listChoice)).add(newMotorcycle);
                 System.out.println("Motorcycle added successfully.");
                 break;
