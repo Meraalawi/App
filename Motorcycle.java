@@ -11,12 +11,12 @@ public class Motorcycle extends Automobile {
         this.length = 0.0;
     }
 
-    public Motorcycle(double tireDiameter, double length, Engine engine, Color color, double width, String plateNumber, FuelType fuelType, GearType gearType, String serialNumber, String manufacture, Date manufactureDate) {
+    public Motorcycle(double tireDiameter, double length, Engine engine, Color color, double width, String plateNumber,
+            FuelType fuelType, GearType gearType, String serialNumber, String manufacture, Date manufactureDate) {
         super(manufacture, manufactureDate, engine, plateNumber, fuelType, gearType, serialNumber);
         this.tireDiameter = tireDiameter;
         this.length = length;
     }
-
 
     public double getTireDiameter() {
         return tireDiameter;
@@ -33,19 +33,19 @@ public class Motorcycle extends Automobile {
     public void setLength(double length) {
         this.length = length;
     }
-     public void print() {
+
+    public void print() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         System.out.println("Motorcycle Details:");
         System.out.println("Manufacture: " + getManufacture());
         System.out.println("Manufacture Date: " + (sdf.format(getManufactureDate())));
         System.out.println("Plate Number: " + getPlateNumber());
         System.out.println("Serial Number: " + getSerialNumber());
-        System.out.println("Fuel Type: " + getFuelType());
         System.out.println("Gear Type: " + getGearType());
-        System.out.println("tireDiameter: " +tireDiameter);
-        System.out.println("Length: " +length);
+        System.out.println("tireDiameter: " + tireDiameter);
+        System.out.println("Length: " + length);
 
         System.out.println("Engine: ");
-            getEngine().print();
+        getEngine().print();
     }
 }
