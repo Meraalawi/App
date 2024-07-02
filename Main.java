@@ -68,7 +68,6 @@ public class Main {
                 case 6:
                     System.out.println("Exiting program.");
                     System.exit(0);
-
             }
         }
     }
@@ -91,21 +90,24 @@ public class Main {
         String plateNumber = scanner.next();
         System.out.print("Enter serial number: ");
         String serialNumber = scanner.next();
-        System.out.print("Enter color (RED, WHITE, BLACK, BLUE, GREEN, YELLOW): ");
-        Color color = Color.valueOf(scanner.next().toUpperCase());
+        System.out.print("Enter color (1: RED, 2: WHITE, 3: BLACK, 4: BLUE, 5: GREEN, 6: YELLOW): ");
+        Color color = getColorFromInput();
         System.out.print("Enter manufacturer: ");
         String manufacturer = scanner.next();
         System.out.print("Enter manufacture date (YYYY-MM-DD): ");
         String dateStr = scanner.next();
         Date manufactureDate = parseDate(dateStr);
-        System.out.print("Enter fuel type (NOT_DEFINE, DIESEL, GASOLINE, ELECTRIC, HYBRID): ");
-        FuelType fuelType = FuelType.valueOf(scanner.next().toUpperCase());
-        System.out.print("Enter gear type (NOT_DEFINE, NORMAL, AUTOMATIC): ");
-        GearType gearType = GearType.valueOf(scanner.next().toUpperCase());
-        System.out.print("Enter width: ");
-        double width = scanner.nextDouble();
+        System.out.print("Enter fuel type (1: NOT_DEFINE, 2: DIESEL, 3: GASOLINE, 4: ELECTRIC, 5: HYBRID): ");
+        FuelType fuelType = getFuelTypeFromInput();
+        System.out.print("Enter gear type (1: NOT_DEFINE, 2: NORMAL, 3: AUTOMATIC): ");
+        GearType gearType = getGearTypeFromInput();
         System.out.print("Enter length: ");
         double length = scanner.nextDouble();
+
+        if (listChoice == 1 || listChoice == 2) {
+            System.out.print("Enter width: ");
+            double width = scanner.nextDouble();
+        }
 
         switch (listChoice) {
             case 1:
@@ -113,6 +115,7 @@ public class Main {
                 int chairNumber = scanner.nextInt();
                 System.out.print("Is furniture leather? (true/false): ");
                 boolean isFurnitureLeather = scanner.nextBoolean();
+                System.out.print("Enter width: ");
                 Car newCar = new Car();
                 ((ArrayList<Car>) automobileMap.get(listChoice)).add(newCar);
                 System.out.println("Car added successfully.");
@@ -138,8 +141,53 @@ public class Main {
         }
     }
 
+    private static Color getColorFromInput() {
+        Map<Integer, Color> colorMap = new HashMap<>();
+        colorMap.put(1, Color.RED);
+        colorMap.put(2, Color.WHITE);
+        colorMap.put(3, Color.BLACK);
+        colorMap.put(4, Color.BLUE);
+        colorMap.put(5, Color.GREEN);
+        colorMap.put(6, Color.YELLOW);
+
+        return colorMap.get(getUserChoice(colorMap.size()));
+    }
+
+    private static FuelType getFuelTypeFromInput() {
+        Map<Integer, FuelType> fuelTypeMap = new HashMap<>();
+        fuelTypeMap.put(1, FuelType.NOT_DEFINE);
+        fuelTypeMap.put(2, FuelType.DIESEL);
+        fuelTypeMap.put(3, FuelType.GASOLINE);
+        fuelTypeMap.put(4, FuelType.ELCTRIC);
+        fuelTypeMap.put(5, FuelType.HYBIRD);
+
+        return fuelTypeMap.get(getUserChoice(fuelTypeMap.size()));
+    }
+
+    private static GearType getGearTypeFromInput() {
+        Map<Integer, GearType> gearTypeMap = new HashMap<>();
+        gearTypeMap.put(1, GearType.NOT_DEFINE);
+        gearTypeMap.put(2, GearType.NORMAL);
+        gearTypeMap.put(3, GearType.AUTOMATIC);
+
+        return gearTypeMap.get(getUserChoice(gearTypeMap.size()));
+    }
+
+    private static int getUserChoice(int numOptions) {
+        int choice;
+        do {
+            System.out.print("Enter a number (1-" + numOptions + "): ");
+            while (!scanner.hasNextInt()) {
+                System.out.print("Invalid input. Enter a number (1-" + numOptions + "): ");
+                scanner.next();
+            }
+            choice = scanner.nextInt();
+        } while (choice < 1 || choice > numOptions);
+        return choice;
+    }
+
     private static void searchVehicle(int listChoice) {
-        System.out.print("Enter the plate number or serial number of the veichle you want to search: ");
+        System.out.print("Enter the plate number or serial number of the vehicle you want to search: ");
     }
 
     private static void deleteVehicle(int listChoice) {
