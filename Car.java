@@ -8,8 +8,8 @@ public class Car extends Vehicle {
         super(0.0, 0.0, null);
         this.chairNumber = 0;
         this.isFurnitureLeather = true;
-    } 
-    
+    }
+
     public Car(int chairNumber, boolean isFurnitureLeather, double width, double length, Color color) {
         super(width, length, color);
         this.chairNumber = chairNumber;
@@ -31,6 +31,7 @@ public class Car extends Vehicle {
     public void setIsFurnitureLeather(boolean isFurnitureLeather) {
         this.isFurnitureLeather = isFurnitureLeather;
     }
+
     public void print() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         System.out.println("Car Details:");
@@ -43,8 +44,8 @@ public class Car extends Vehicle {
         System.out.println("Serial Number: " + getSerialNumber());
         System.out.println("Manufacturer: " + getManufacture());
         System.out.println("Manufacture Date: " + (sdf.format(getManufactureDate())));
-        System.out.println("Fuel Type: " + getFuelType());
         System.out.println("Gear Type: " + getGearType());
+        System.out.println("Engine: ");
         getEngine().print();
     }
 }
