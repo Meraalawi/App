@@ -29,6 +29,7 @@ public class Truck extends Vehicle {
     public void setFullWeight(double fullWeight) {
         this.fullWeight = fullWeight;
     }
+
     public void print() {
         System.out.println("Truck Details:");
         System.out.println("Width: " + getWidth());
@@ -40,7 +41,6 @@ public class Truck extends Vehicle {
         System.out.println("Serial Number: " + getSerialNumber());
         System.out.println("Manufacturer: " + getManufacture());
         System.out.println("Manufacture Date: " + getManufactureDate());
-        System.out.println("Fuel Type: " + getFuelType());
         System.out.println("Gear Type: " + getGearType());
         System.out.println("Engine: ");
         getEngine().print();
