@@ -97,8 +97,11 @@ public class Main {
         System.out.print("Enter manufacture date (YYYY-MM-DD): ");
         String dateStr = scanner.next();
         Date manufactureDate = parseDate(dateStr);
-        System.out.print("Enter fuel type (1: NOT_DEFINE, 2: DIESEL, 3: GASOLINE, 4: ELECTRIC, 5: HYBRID): ");
-        FuelType fuelType = getFuelTypeFromInput();
+        while (manufactureDate == null) {
+            System.out.print("Enter manufacture date (YYYY-MM-DD): ");
+            dateStr = scanner.next();
+            manufactureDate = parseDate(dateStr);
+        }
         System.out.print("Enter gear type (1: NOT_DEFINE, 2: NORMAL, 3: AUTOMATIC): ");
         GearType gearType = getGearTypeFromInput();
         System.out.print("Enter length: ");
@@ -109,6 +112,8 @@ public class Main {
             double width = scanner.nextDouble();
         }
 
+        Engine engine = addEngineDetails();
+
         switch (listChoice) {
             case 1:
                 System.out.print("Enter chair number: ");
@@ -118,6 +123,7 @@ public class Main {
                 System.out.print("Enter width: ");
                 Car newCar = new Car();
                 ((ArrayList<Car>) automobileMap.get(listChoice)).add(newCar);
+                newCar.print();
                 System.out.println("Car added successfully.");
                 break;
             case 2:
@@ -139,6 +145,25 @@ public class Main {
             default:
                 System.out.println("Invalid vehicle type.");
         }
+    }
+
+    private static Engine addEngineDetails() {
+        System.out.println("Enter engine details:");
+
+        System.out.print("Enter engine manufacture: ");
+        String manufacture = scanner.next();
+        System.out.print("Enter engine manufacture date (YYYY-MM-DD): ");
+        String dateStr = scanner.next();
+        System.out.print("Enter engine model: ");
+        String model = scanner.next();
+        System.out.print("Enter engine capacity: ");
+        int capacity = scanner.nextInt();
+        System.out.print("Enter engine cylinder: ");
+        int cylinder = scanner.nextInt();
+        System.out.print("Enter engine fuel type (1: NOT_DEFINE, 2: DIESEL, 3: GASOLINE, 4: ELECTRIC, 5: HYBRID): ");
+        FuelType fuelType = getFuelTypeFromInput();
+        return new Engine();
+
     }
 
     private static Color getColorFromInput() {
