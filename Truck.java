@@ -1,18 +1,28 @@
+import java.util.Date;
+
 public class Truck extends Vehicle {
     private double freeWeight;
     private double fullWeight;
-
+    Engine engine;
     public Truck() {
         super(0.0, 0.0, null);
         this.freeWeight = 0.0;
         this.fullWeight = 0.0;
     }
 
-    public Truck(double freeWeight, double fullWeight, double width, double length, Color color) {
-        super(width, length, color);
-        this.freeWeight = freeWeight;
+    public Truck(String plateNumber, String serialNumber, Color color, String manufacturer, Date manufactureDate,
+    GearType gearType, double length, Engine engine, double fullWeight, double freeWeight) {
+        super(0.0, length, color); // Assuming width is 0.0 (not provided in input)
+        setPlateNumber(plateNumber);
+        setSerialNumber(serialNumber);
+        setManufacture(manufacturer);
+        setManufactureDate(manufactureDate);
+        setGearType(gearType);
+        this.engine = engine;
         this.fullWeight = fullWeight;
+        this.freeWeight = freeWeight;
     }
+
 
     public double getFreeWeight() {
         return this.freeWeight;
