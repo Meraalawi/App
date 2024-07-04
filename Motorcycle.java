@@ -4,6 +4,7 @@ import java.util.Date;
 public class Motorcycle extends Automobile {
     private double tireDiameter;
     private double length;
+     Engine engine;
 
     public Motorcycle() {
         super(null, new Date(), null, null, null, null, null);
@@ -11,12 +12,14 @@ public class Motorcycle extends Automobile {
         this.length = 0.0;
     }
 
-    public Motorcycle(double tireDiameter, double length, Engine engine, Color color, double width, String plateNumber,
-            FuelType fuelType, GearType gearType, String serialNumber, String manufacture, Date manufactureDate) {
-        super(manufacture, manufactureDate, engine, plateNumber, fuelType, gearType, serialNumber);
-        this.tireDiameter = tireDiameter;
+    public Motorcycle(String plateNumber, String serialNumber, Color color, String manufacturer, Date manufactureDate,
+        GearType gearType, double length, Engine engine, double tireDiameter) {
+        super(manufacturer, manufactureDate, engine, plateNumber, null, gearType, serialNumber);
         this.length = length;
-    }
+        this.engine = engine;
+        this.tireDiameter = tireDiameter;
+}
+
 
     public double getTireDiameter() {
         return tireDiameter;
