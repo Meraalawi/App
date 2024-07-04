@@ -1,19 +1,44 @@
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 
 public class Car extends Vehicle {
     private int chairNumber;
     private boolean isFurnitureLeather;
+    private Engine engine;
 
     public Car() {
         super(0.0, 0.0, null);
         this.chairNumber = 0;
         this.isFurnitureLeather = true;
+        this.engine = new Engine();
     }
-
-    public Car(int chairNumber, boolean isFurnitureLeather, double width, double length, Color color) {
+    public Car(int chairNumber, boolean isFurnitureLeather, double width, double length, Color color,Engine engine) {
         super(width, length, color);
         this.chairNumber = chairNumber;
         this.isFurnitureLeather = isFurnitureLeather;
+        this.engine = engine;
+    }
+
+    public Car(String plateNumber, String serialNumber, Color color, String manufacturer, java.util.Date manufactureDate,
+    GearType gearType, double length, Engine engine, int chairNumber, boolean isFurnitureLeather) {
+        super(0.0, length, color);
+       setPlateNumber(plateNumber);
+       setSerialNumber(serialNumber);
+       setManufacture(manufacturer);
+       setManufactureDate(manufactureDate);
+       setGearType(gearType);
+       this.engine = engine;
+       this.chairNumber = chairNumber;
+       this.isFurnitureLeather = isFurnitureLeather;
+   }
+
+
+    public Engine getEngine() {
+        return engine;
+    }
+
+    public void setEngine(Engine engine) {
+        this.engine = engine;
     }
 
     public int getChairNumber() {
