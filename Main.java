@@ -73,7 +73,7 @@ public class Main {
     }
 
     private static Date parseDate(String dateStr) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD");
         try {
             return dateFormat.parse(dateStr);
         } catch (ParseException e) {
@@ -94,15 +94,13 @@ public class Main {
         Color color = getColorFromInput();
         System.out.print("Enter manufacturer: ");
         String manufacturer = scanner.next();
-        System.out.print("Enter manufacture date (YYYY-MM-DD): ");
-        String dateStr = scanner.next();
-        Date manufactureDate = parseDate(dateStr);
-        while (manufactureDate == null) {
+        Date manufactureDate;
+        do {
             System.out.print("Enter manufacture date (YYYY-MM-DD): ");
-            dateStr = scanner.next();
+            String dateStr = scanner.next();
             manufactureDate = parseDate(dateStr);
-        }
-        System.out.print("Enter gear type (1: NOT_DEFINE, 2: NORMAL, 3: AUTOMATIC): ");
+        } while (manufactureDate == null);
+             System.out.print("Enter gear type (1: NOT_DEFINE, 2: NORMAL, 3: AUTOMATIC): ");
         GearType gearType = getGearTypeFromInput();
         System.out.print("Enter length: ");
         double length = scanner.nextDouble();
@@ -119,9 +117,8 @@ public class Main {
                 System.out.print("Enter chair number: ");
                 int chairNumber = scanner.nextInt();
                 System.out.print("Is furniture leather? (true/false): ");
-                boolean isFurnitureLeather = scanner.nextBoolean();
-                System.out.print("Enter width: ");
-                Car newCar = new Car();
+                boolean isFurnitureLeather = parseBooleanInput(scanner.next());
+                Car newCar = new Car(plateNumber, serialNumber, color, manufacturer, manufactureDate, gearType, length, engine, chairNumber, isFurnitureLeather);
                 ((ArrayList<Car>) automobileMap.get(listChoice)).add(newCar);
                 newCar.print();
                 System.out.println("Car added successfully.");
@@ -131,14 +128,14 @@ public class Main {
                 double fullWeight = scanner.nextDouble();
                 System.out.print("Enter free Weight capacity: ");
                 double freeWeight = scanner.nextDouble();
-                Truck newTruck = new Truck();
+                Truck newTruck = new Truck(plateNumber, serialNumber, color, manufacturer, manufactureDate, gearType, length, engine, fullWeight, freeWeight);
                 ((ArrayList<Truck>) (automobileMap.get(listChoice))).add(newTruck);
                 System.out.println("Truck added successfully.");
                 break;
             case 3:
                 System.out.print("Enter tire Diameter: ");
                 double tireDiameter = scanner.nextDouble();
-                Motorcycle newMotorcycle = new Motorcycle();
+                Motorcycle newMotorcycle = new Motorcycle(plateNumber, serialNumber, color, manufacturer, manufactureDate, gearType, length, engine, tireDiameter);
                 ((ArrayList<Motorcycle>) automobileMap.get(listChoice)).add(newMotorcycle);
                 System.out.println("Motorcycle added successfully.");
                 break;
@@ -146,25 +143,55 @@ public class Main {
                 System.out.println("Invalid vehicle type.");
         }
     }
+    private static boolean parseBooleanInput(String input) {
+        return input.equalsIgnoreCase("t");
+     }
+     
 
-    private static Engine addEngineDetails() {
+     private static Engine addEngineDetails() {
         System.out.println("Enter engine details:");
-
+     
+     
         System.out.print("Enter engine manufacture: ");
         String manufacture = scanner.next();
-        System.out.print("Enter engine manufacture date (YYYY-MM-DD): ");
-        String dateStr = scanner.next();
+     
+     
+        Date manufactureDate;
+        do {
+            System.out.print("Enter engine manufacture date (YYYY-MM-DD): ");
+            String dateStr = scanner.next();
+            manufactureDate = parseDate(dateStr);
+        } while (manufactureDate == null);
+     
+     
         System.out.print("Enter engine model: ");
         String model = scanner.next();
+     
+     
         System.out.print("Enter engine capacity: ");
         int capacity = scanner.nextInt();
+     
+     
         System.out.print("Enter engine cylinder: ");
         int cylinder = scanner.nextInt();
-        System.out.print("Enter engine fuel type (1: NOT_DEFINE, 2: DIESEL, 3: GASOLINE, 4: ELECTRIC, 5: HYBRID): ");
+     
+     
+        System.out.print("Enter feul type:  (1: NOT_DEFINE, 2: Diesel, 3: Gasoline ,4:Elctric ,5;Hybird):");
         FuelType fuelType = getFuelTypeFromInput();
-        return new Engine();
-
-    }
+     
+     
+        Engine engine = new Engine();
+        engine.setManufacture(manufacture);
+        engine.setManufactureDate(manufactureDate);
+        engine.setModel(model);
+        engine.setCapacity(capacity);
+        engine.setCylinder(cylinder);
+        engine.setFuelType(fuelType);
+     
+     
+        return engine;
+     }
+     
 
     private static Color getColorFromInput() {
         Map<Integer, Color> colorMap = new HashMap<>();
