@@ -9,6 +9,25 @@ public class Engine {
     private int cylinder;
     private FuelType fuelType;
 
+    public Engine() {
+        this.manufacture = "Unknown";
+        this.manufactureDate = new Date();
+        this.model = "Unknown";
+        this.capacity = 0;
+        this.cylinder = 0;
+        this.fuelType = FuelType.NOT_DEFINE;
+    }
+
+    public Engine(String manufacture, Date manufactureDate, String model, int capacity, int cylinder,
+            FuelType fuelType) {
+        this.manufacture = manufacture;
+        this.manufactureDate = manufactureDate;
+        this.model = model;
+        this.capacity = capacity;
+        this.cylinder = cylinder;
+        this.fuelType = fuelType;
+    }
+
     public String getManufacture() {
         return manufacture;
     }
@@ -56,13 +75,14 @@ public class Engine {
     public void setFuelType(FuelType fuelType) {
         this.fuelType = fuelType;
     }
+
     public void print() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         System.out.println("Engine Details:");
         System.out.println("Manufacture: " + manufacture);
-        System.out.println("Manufacture Date: " + ( sdf.format(manufactureDate)));
+        System.out.println("Manufacture Date: " + (sdf.format(manufactureDate)));
         System.out.println("Model: " + model);
-        System.out.println("Capacity: " + capacity );
+        System.out.println("Capacity: " + capacity);
         System.out.println("Cylinders: " + cylinder);
         System.out.println("Fuel Type: " + fuelType);
     }
