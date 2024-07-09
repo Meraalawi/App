@@ -1,6 +1,10 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
 public class Main {
 
@@ -85,22 +89,19 @@ public class Main {
     @SuppressWarnings("unchecked")
     private static void addVehicle(int listChoice) {
         System.out.println("Adding a new vehicle...");
+        Engine engine = addEngineDetails();
 
-        System.out.print("Enter plate number: ");
-        String plateNumber = scanner.next();
-        System.out.print("Enter serial number: ");
-        String serialNumber = scanner.next();
+        String plateNumber = getPlateNumber();
+        String serialNumber = getSerialNumber();
         System.out.print("Enter color (1: RED, 2: WHITE, 3: BLACK, 4: BLUE, 5: GREEN, 6: YELLOW): ");
         Color color = getColorFromInput();
         System.out.print("Enter manufacturer: ");
         String manufacturer = scanner.next();
         Date manufactureDate;
-        do {
-            System.out.print("Enter manufacture date (YYYY-MM-DD): ");
-            String dateStr = scanner.next();
-            manufactureDate = parseDate(dateStr);
-        } while (manufactureDate == null);
-             System.out.print("Enter gear type (1: NOT_DEFINE, 2: NORMAL, 3: AUTOMATIC): ");
+        System.out.print("Enter manufacture date (YYYY-MM-DD): ");
+        String dateStr = scanner.next();
+        manufactureDate = parseDate(dateStr);
+        System.out.print("Enter gear type (1: NOT_DEFINE, 2: NORMAL, 3: AUTOMATIC): ");
         GearType gearType = getGearTypeFromInput();
         System.out.print("Enter length: ");
         double length = scanner.nextDouble();
@@ -110,12 +111,9 @@ public class Main {
             double width = scanner.nextDouble();
         }
 
-        Engine engine = addEngineDetails();
-
         switch (listChoice) {
             case 1:
-                System.out.print("Enter chair number: ");
-                int chairNumber = scanner.nextInt();
+                int chairNumber = getChairNumber();
                 System.out.print("Is furniture leather? (true/false): ");
                 boolean isFurnitureLeather = parseBooleanInput(scanner.next());
                 Car newCar = new Car(plateNumber, serialNumber, color, manufacturer, manufactureDate, gearType, length, engine, chairNumber, isFurnitureLeather);
@@ -145,41 +143,25 @@ public class Main {
     }
     private static boolean parseBooleanInput(String input) {
         return input.equalsIgnoreCase("t");
-     }
-     
+    }
 
-     private static Engine addEngineDetails() {
+    private static Engine addEngineDetails() {
         System.out.println("Enter engine details:");
-     
-     
         System.out.print("Enter engine manufacture: ");
         String manufacture = scanner.next();
-     
-     
         Date manufactureDate;
-        do {
             System.out.print("Enter engine manufacture date (YYYY-MM-DD): ");
             String dateStr = scanner.next();
             manufactureDate = parseDate(dateStr);
-        } while (manufactureDate == null);
-     
-     
         System.out.print("Enter engine model: ");
         String model = scanner.next();
-     
-     
         System.out.print("Enter engine capacity: ");
         int capacity = scanner.nextInt();
-     
-     
+    
         System.out.print("Enter engine cylinder: ");
         int cylinder = scanner.nextInt();
-     
-     
         System.out.print("Enter feul type:  (1: NOT_DEFINE, 2: Diesel, 3: Gasoline ,4:Elctric ,5;Hybird):");
         FuelType fuelType = getFuelTypeFromInput();
-     
-     
         Engine engine = new Engine();
         engine.setManufacture(manufacture);
         engine.setManufactureDate(manufactureDate);
@@ -187,11 +169,9 @@ public class Main {
         engine.setCapacity(capacity);
         engine.setCylinder(cylinder);
         engine.setFuelType(fuelType);
-     
-     
         return engine;
-     }
-     
+    }
+
 
     private static Color getColorFromInput() {
         Map<Integer, Color> colorMap = new HashMap<>();
@@ -230,7 +210,7 @@ public class Main {
         do {
             System.out.print("Enter a number (1-" + numOptions + "): ");
             while (!scanner.hasNextInt()) {
-                System.out.print("Invalid input. Enter a number (1-" + numOptions + "): ");
+                System.out.print("Invalid input. Enter a number (1-" + numOptions + "):");
                 scanner.next();
             }
             choice = scanner.nextInt();
@@ -248,5 +228,35 @@ public class Main {
 
     private static void modifyVehicle(int listChoice) {
         System.out.println("This is the modifyVehicle method.");
+    }
+    private static String getPlateNumber() {
+        String plateNumber;
+        do {
+            System.out.print("Enter plate number (first letter + up to 5 digits): ");
+            plateNumber = scanner.next();
+        } while (!plateNumber.matches("^[A-Za-z]\\d{1,5}$"));
+        return plateNumber;
+    }
+
+    private static String getSerialNumber() {
+        String serialNumber;
+        do {
+            System.out.print("Enter serial number (6 or more characters): ");
+            serialNumber = scanner.next();
+        } while (!serialNumber.matches("^.{6,20}$"));
+        return serialNumber;
+    }
+    private static int getChairNumber() {
+        String regex = "[2-9]"; // 2 min and 9 max
+        int chairNumber;
+        do {
+            System.out.print("Enter chair number: ");
+            String input = scanner.nextLine().trim();
+            if (input.matches(regex)) {
+                chairNumber = Integer.parseInt(input);
+                break;
+                }
+        } while (true);
+        return chairNumber;
     }
 }
