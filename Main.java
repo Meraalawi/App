@@ -77,15 +77,35 @@ public class Main {
     }
 
     private static Date parseDate(String dateStr) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD");
-        try {
-            return dateFormat.parse(dateStr);
-        } catch (ParseException e) {
-            System.out.println("Invalid date format. Please use YYYY-MM-DD.");
-            return null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
+        dateFormat.setLenient(false); 
+        Date parsedDate = null;
+    
+        while (parsedDate == null) {
+            try {
+                parsedDate = dateFormat.parse(dateStr);
+                
+                // Validate that the date is 1950 or later
+                if (parsedDate != null) {
+                
+                    Date minDate = dateFormat.parse("1950-01-01");
+                    if (parsedDate.compareTo(minDate) < 0) {
+                        System.out.println("Manufacture date must be 1950 or later.");
+                        parsedDate = null; 
+                    }
+                }
+            } catch (ParseException e) {
+                System.out.println("Invalid date format. Please use YYYY-MM-dd.");
+            }
+            
+            if (parsedDate == null) {
+                System.out.print("Enter manufacture date (YYYY-MM-dd): ");
+                dateStr = scanner.next();
+            }
         }
-    }
-
+    
+        return parsedDate;
+    }    
     @SuppressWarnings("unchecked")
     private static void addVehicle(int listChoice) {
         System.out.println("Adding a new vehicle...");
@@ -138,7 +158,7 @@ public class Main {
                 System.out.println("Motorcycle added successfully.");
                 break;
             default:
-                System.out.println("Invalid vehicle type.");
+                System.out.println("Invalid vehicle type..try again");
         }
     }
     private static boolean parseBooleanInput(String input) {
@@ -150,17 +170,28 @@ public class Main {
         System.out.print("Enter engine manufacture: ");
         String manufacture = scanner.next();
         Date manufactureDate;
-            System.out.print("Enter engine manufacture date (YYYY-MM-DD): ");
-            String dateStr = scanner.next();
-            manufactureDate = parseDate(dateStr);
+        System.out.print("Enter engine manufacture date : ");
+        String dateStr = scanner.next();
+        manufactureDate = parseDate(dateStr);
         System.out.print("Enter engine model: ");
         String model = scanner.next();
-        System.out.print("Enter engine capacity: ");
-        int capacity = scanner.nextInt();
-    
-        System.out.print("Enter engine cylinder: ");
-        int cylinder = scanner.nextInt();
-        System.out.print("Enter feul type:  (1: NOT_DEFINE, 2: Diesel, 3: Gasoline ,4:Elctric ,5;Hybird):");
+        int capacity;
+        do {
+            System.out.print("Enter engine capacity (max 1350): ");
+            capacity = scanner.nextInt();
+            if (capacity > 1350) {
+                System.out.println("Capacity must be 1350 or less.");
+            }
+        } while (capacity > 1350);
+        int cylinder;
+        do {
+            System.out.print("Enter engine cylinder count (max 16): ");
+            cylinder = scanner.nextInt();
+            if (cylinder > 16) {
+                System.out.println("Cylinder count must be 16 or less.");
+            }
+        } while (cylinder > 16);
+            System.out.print("Enter feul type:  (1: NOT_DEFINE, 2: Diesel, 3: Gasoline ,4:Elctric ,5;Hybird):");
         FuelType fuelType = getFuelTypeFromInput();
         Engine engine = new Engine();
         engine.setManufacture(manufacture);
@@ -243,7 +274,7 @@ public class Main {
         do {
             System.out.print("Enter serial number (6 or more characters): ");
             serialNumber = scanner.next();
-        } while (!serialNumber.matches("^.{6,20}$"));
+        } while (!serialNumber.matches("^[A-Za-z0-9]{6,20}$"));
         return serialNumber;
     }
     private static int getChairNumber() {
