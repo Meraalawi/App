@@ -179,17 +179,11 @@ public class Main {
         do {
             System.out.print("Enter engine capacity (max 1350): ");
             capacity = scanner.nextInt();
-            if (capacity > 1350) {
-                System.out.println("Capacity must be 1350 or less.");
-            }
         } while (capacity > 1350);
         int cylinder;
         do {
             System.out.print("Enter engine cylinder count (max 16): ");
             cylinder = scanner.nextInt();
-            if (cylinder > 16) {
-                System.out.println("Cylinder count must be 16 or less.");
-            }
         } while (cylinder > 16);
             System.out.print("Enter feul type:  (1: NOT_DEFINE, 2: Diesel, 3: Gasoline ,4:Elctric ,5;Hybird):");
         FuelType fuelType = getFuelTypeFromInput();
@@ -254,60 +248,33 @@ public class Main {
         System.out.print("Enter the plate number or serial number of the vehicle you want to search: ");
         String searchTerm = scanner.next();
         boolean found = false;
-        switch (listChoice) {
-            case 1:
-                ArrayList<Car> carList = (ArrayList<Car>) automobileMap.get(listChoice);
-                for (Car car : carList) {
-                    if (searchTerm.equalsIgnoreCase(car.getPlateNumber()) || searchTerm.equalsIgnoreCase(car.getSerialNumber())) {
-                        if (searchTerm.equalsIgnoreCase(car.getPlateNumber())) {
-                            System.out.println("Search based by plate number:");
-                        } else {
-                            System.out.println("Search based by serial number:");
-                        }
-                        car.print();
-                        found = true;
-                        break;
-                    }
+        ArrayList<? extends Automobile> vehicleList = (ArrayList<? extends Automobile>) automobileMap.get(listChoice);
+            for (Automobile vehicle : vehicleList) {
+            if (searchTerm.equalsIgnoreCase(vehicle.getPlateNumber()) || searchTerm.equalsIgnoreCase(vehicle.getSerialNumber())) {
+                if (searchTerm.equalsIgnoreCase(vehicle.getPlateNumber())) {
+                    System.out.println("Search based by plate number:");
+                } else {
+                    System.out.println("Search based by serial number:");
                 }
-                break;
-            case 2:
-                ArrayList<Truck> truckList = (ArrayList<Truck>) automobileMap.get(listChoice);
-                for (Truck truck : truckList) {
-                    if (searchTerm.equalsIgnoreCase(truck.getPlateNumber()) || searchTerm.equalsIgnoreCase(truck.getSerialNumber())) {
-                        if (searchTerm.equalsIgnoreCase(truck.getPlateNumber())) {
-                            System.out.println("Search based by plate number:");
-                        } else {
-                            System.out.println("Search based by serial number:");
-                        }
-                        truck.print();
-                        found = true;
-                        break;
-                    }
+                
+                if (vehicle instanceof Car && listChoice == 1) {
+                    ((Car) vehicle).print();
+                } else if (vehicle instanceof Truck && listChoice == 2) {
+                    ((Truck) vehicle).print();
+                } else {
+                    System.out.println("Invalid vehicle type.");
                 }
+    
+                found = true;
                 break;
-            case 3:
-                ArrayList<Motorcycle> motorcycleList = (ArrayList<Motorcycle>) automobileMap.get(listChoice);
-                for (Motorcycle motorcycle : motorcycleList) {
-                    if (searchTerm.equalsIgnoreCase(motorcycle.getPlateNumber()) || searchTerm.equalsIgnoreCase(motorcycle.getSerialNumber())) {
-                        if (searchTerm.equalsIgnoreCase(motorcycle.getPlateNumber())) {
-                            System.out.println("Search based by plate number:");
-                        } else {
-                            System.out.println("Search based by serial number:");
-                        }
-                        motorcycle.print();
-                        found = true;
-                        break;
-                    }
-                }
-                break;
-            default:
-                System.out.println("Invalid vehicle type.");
+            }
         }
     
         if (!found) {
             System.out.println("Vehicle not found.");
         }
     }
+    
     private static void deleteVehicle(int listChoice) {
         System.out.println("This is the deleteVehicle method.");
     }
