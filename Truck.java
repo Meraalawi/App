@@ -53,6 +53,12 @@ public class Truck extends Vehicle {
         System.out.println("Manufacture Date: " + getManufactureDate());
         System.out.println("Gear Type: " + getGearType());
         System.out.println("Engine: ");
-        getEngine().print();
+        if (engine != null) {
+            System.out.println("Engine:");
+            engine.print();
+        } else {
+            System.out.println("Engine details are not available.");
+        }
+    
     }
 }
