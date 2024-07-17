@@ -134,8 +134,8 @@ public class Main {
         Date manufactureDate = getDateInput("Enter engine manufacture date (yyyy-MM-dd): ");
         System.out.print("Enter engine model: ");
         String model = scanner.next();
-        int capacity = getEngineCapacity();
-        int cylinder = getEngineCylinderCount();
+        int capacity = Engine.getEngineCapacity();
+        int cylinder =Engine.getEngineCylinderCount();
         FuelType fuelType = FuelType.getFuelTypeFromInput();
         Engine engine = new Engine();
         engine.setManufacture(manufacture);
@@ -463,10 +463,10 @@ public class Main {
                     String model = scanner.next();
                     break;
                 case 4:
-                    int capacity = getEngineCapacity();
+                    int capacity = Engine.getEngineCapacity();
                     break;
                 case 5:
-                    int cylinder = getEngineCylinderCount();
+                    int cylinder = Engine.getEngineCylinderCount();
                     break;
                 case 6:
                     FuelType fuelType = FuelType.getFuelTypeFromInput();
@@ -515,29 +515,7 @@ public class Main {
         } while (true);
         return chairNumber;
     }
-    private static int getEngineCapacity() {
-        int capacity;
-        do {
-            System.out.print("Enter engine capacity (max 1350): ");
-            capacity = scanner.nextInt();
-            if (capacity > 1350) {
-                System.out.println("Capacity exceeds maximum allowed (1350). Please enter again.");
-            }
-        } while (capacity > 1350);
-        return capacity;
-    }
 
-    private static int getEngineCylinderCount() {
-        int cylinder;
-        do {
-            System.out.print("Enter engine cylinder count (max 16): ");
-            cylinder = scanner.nextInt();
-            if (cylinder > 16) {
-                System.out.println("Cylinder count exceeds maximum allowed (16). Please enter again.");
-            }
-        } while (cylinder > 16);
-        return cylinder;
-}
 private static Date getDateInput(String promptMessage) {
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     dateFormat.setLenient(false);
