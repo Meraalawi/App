@@ -1,5 +1,6 @@
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import  java.util.Scanner;
 
 public class Engine {
     private String manufacture;
@@ -8,6 +9,8 @@ public class Engine {
     private int capacity;
     private int cylinder;
     private FuelType fuelType;
+
+    private static final Scanner scanner = new Scanner(System.in);
 
     public String getManufacture() {
         return manufacture;
@@ -56,6 +59,29 @@ public class Engine {
     public void setFuelType(FuelType fuelType) {
         this.fuelType = fuelType;
     }
+    public  static int getEngineCylinderCount() {
+        int cylinder;
+        do {
+            System.out.print("Enter engine cylinder count (max 16): ");
+            cylinder = scanner.nextInt();
+            if (cylinder > 16) {
+                System.out.println("Cylinder count exceeds maximum allowed (16). Please enter again.");
+            }
+        } while (cylinder > 16);
+        return cylinder;
+}
+    public static int getEngineCapacity() {
+        int capacity;
+        do {
+            System.out.print("Enter engine capacity (max 1350): ");
+            capacity = scanner.nextInt();
+            if (capacity > 1350) {
+                System.out.println("Capacity exceeds maximum allowed (1350). Please enter again.");
+            }
+        } while (capacity > 1350);
+        return capacity;
+    }
+
 
     public void print() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -70,4 +96,4 @@ public class Engine {
         System.out.println("Cylinders: " + cylinder);
         System.out.println("Fuel Type: " + fuelType);
     }
- }
+}
