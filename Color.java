@@ -21,7 +21,7 @@ enum Color {
     }
     public static Color getColorFromInput() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter color (1: RED, 2: WHITE, 3: BLACK, 4: BLUE, 5: GREEN, 6: YELLOW): ");
+        System.out.print("Enter color:\n1: RED\n2: WHITE\n3: BLACK\n4: BLUE\n5: GREEN\n6: YELLOW\n");
         int choice = scanner.nextInt();
 
         return colorMap.getOrDefault(choice, NOT_DEFINE);
