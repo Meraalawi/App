@@ -91,7 +91,6 @@ public class Main {
         GearType gearType = GearType.getGearTypeFromInput();
         System.out.print("Enter length: ");
         double length = scanner.nextDouble();
-        double width = getWidth(listChoice);
 
         switch (listChoice) {
             case 1:
@@ -100,15 +99,18 @@ public class Main {
                 boolean isFurnitureLeather = parseBooleanInput(scanner.next());
                 Car newCar = new Car(plateNumber, serialNumber, color, manufacturer, manufactureDate, gearType, length, engine, chairNumber, isFurnitureLeather);
                 ((ArrayList<Car>) automobileMap.get(listChoice)).add(newCar);
+                newCar.setWidth(getWidth(listChoice));
                 newCar.print();
                 System.out.println("Car added successfully.");
                 break;
+        
             case 2:
                 System.out.print("Enter full Weight capacity: ");
                 double fullWeight = scanner.nextDouble();
                 System.out.print("Enter free Weight capacity: ");
                 double freeWeight = scanner.nextDouble();
                 Truck newTruck = new Truck(plateNumber, serialNumber, color, manufacturer, manufactureDate, gearType, length, engine, fullWeight, freeWeight);
+                newTruck.setWidth(getWidth(listChoice));
                 ((ArrayList<Truck>) (automobileMap.get(listChoice))).add(newTruck);
                 System.out.println("Truck added successfully.");
                 break;
@@ -152,6 +154,7 @@ public class Main {
         System.out.print("Enter the plate number or serial number of the vehicle you want to search: ");
         String searchTerm = scanner.next();
         boolean found = false;
+        
         ArrayList<? extends Automobile> vehicleList = (ArrayList<? extends Automobile>) automobileMap.get(listChoice);
             for (Automobile vehicle : vehicleList) {
             if (searchTerm.equalsIgnoreCase(vehicle.getPlateNumber()) || searchTerm.equalsIgnoreCase(vehicle.getSerialNumber())) {
@@ -494,27 +497,39 @@ public class Main {
         return serialNumber;
     }
     private static double getWidth(int listChoice) {
-        double width;
-        width = 0.0;
+        double width = 0.0;
         if (listChoice == 1 || listChoice == 2) {
             System.out.print("Enter width: ");
-            width = scanner.nextDouble();
+            if (scanner.hasNextDouble()) {
+                width = scanner.nextDouble();
+                scanner.nextLine(); // Consume newline character
+            } else {
+                System.out.println("Invalid input. Please enter a valid number.");
+                scanner.nextLine(); // Consume newline character to clear buffer
+            }
         }
         return width;
     }
-    private static int getChairNumber() {
-        String regex = "[2-9]"; // 2 min and 9 max
-        int chairNumber;
-        do {
-            System.out.print("Enter chair number: ");
-            String input = scanner.nextLine().trim();
-            if (input.matches(regex)) {
-                chairNumber = Integer.parseInt(input);
-                break;
-                }
-        } while (true);
+            private static int getChairNumber() {
+        int chairNumber = 0;
+        boolean validInput = false;
+        
+        System.out.print("Enter chair number (between 2 and 9): ");
+        
+    
+            chairNumber = scanner.nextInt();
+            
+            if (chairNumber >= 2 && chairNumber <= 9) {
+                validInput = true; // Valid input, set flag to true
+            } else {
+                System.out.println("Chair number must be between 2 and 9.");
+                System.out.print("Enter chair number (between 2 and 9): ");
+            }
+        
+        
         return chairNumber;
     }
+    
 
 private static Date getDateInput(String promptMessage) {
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
