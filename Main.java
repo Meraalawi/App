@@ -154,20 +154,17 @@ public class Main {
         System.out.print("Enter the plate number or serial number of the vehicle you want to search: ");
         String searchTerm = scanner.next();
         boolean found = false;
-        
+    
         ArrayList<? extends Automobile> vehicleList = (ArrayList<? extends Automobile>) automobileMap.get(listChoice);
-            for (Automobile vehicle : vehicleList) {
+    
+        for (Automobile vehicle : vehicleList) {
             if (searchTerm.equalsIgnoreCase(vehicle.getPlateNumber()) || searchTerm.equalsIgnoreCase(vehicle.getSerialNumber())) {
-                if (searchTerm.equalsIgnoreCase(vehicle.getPlateNumber())) {
-                    System.out.println("Search based by plate number:");
-                } else {
-                    System.out.println("Search based by serial number:");
-                }
-                
                 if (vehicle instanceof Car && listChoice == 1) {
                     ((Car) vehicle).print();
                 } else if (vehicle instanceof Truck && listChoice == 2) {
                     ((Truck) vehicle).print();
+                } else if (vehicle instanceof Motorcycle && listChoice == 3) {
+                    ((Motorcycle) vehicle).print();
                 } else {
                     System.out.println("Invalid vehicle type.");
                 }
@@ -177,6 +174,11 @@ public class Main {
             }
         }
     
+        if (!found) {
+            System.out.println("Vehicle not found.");
+        }
+    
+        
         if (!found) {
             System.out.println("Vehicle not found.");
         }
