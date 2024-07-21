@@ -3,6 +3,8 @@ import java.util.Date;
 import  java.util.Scanner;
 
 public class Engine {
+
+    
     private String manufacture;
     private Date manufactureDate;
     private String model;
@@ -12,6 +14,14 @@ public class Engine {
 
     private static final Scanner scanner = new Scanner(System.in);
 
+public Engine(String manufacture, Date manufactureDate, String model, int capacity, int cylinder, FuelType fuelType) {
+        this.manufacture = manufacture;
+        this.manufactureDate = manufactureDate;
+        this.model = model;
+        this.capacity = capacity;
+        this.cylinder = cylinder;
+        this.fuelType = fuelType;
+    }
     public String getManufacture() {
         return manufacture;
     }
