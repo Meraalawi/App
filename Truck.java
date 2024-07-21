@@ -1,4 +1,5 @@
 import java.util.Date;
+import java.util.Scanner;
 
 public class Truck extends Vehicle {
     private double freeWeight;
@@ -23,6 +24,7 @@ public class Truck extends Vehicle {
         this.freeWeight = freeWeight;
     }
 
+    static Scanner scanner = new Scanner(System.in);
 
     public double getFreeWeight() {
         return this.freeWeight;
@@ -39,6 +41,24 @@ public class Truck extends Vehicle {
     public void setFullWeight(double fullWeight) {
         this.fullWeight = fullWeight;
     }
+    
+    public static double getValidWeight(String prompt) {
+        double weight;
+        do {
+            System.out.print(prompt);
+            while (!scanner.hasNextDouble()) {
+                System.out.println("Invalid input. Please enter a valid number.");
+                scanner.next(); // clear the invalid input
+                System.out.print(prompt);
+            }
+            weight = scanner.nextDouble();
+            if (weight <= 0) {
+                System.out.println("Weight must be a positive number. Please enter again.");
+            }
+        } while (weight <= 0);
+        return weight;
+    }
+        
 
     public void print() {
         System.out.println("Truck Details:");
