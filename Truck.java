@@ -12,18 +12,17 @@ public class Truck extends Vehicle {
     }
 
     public Truck(String plateNumber, String serialNumber, Color color, String manufacturer, Date manufactureDate,
-    GearType gearType, double length, Engine engine, double fullWeight, double freeWeight) {
-        super(0.0, length, color); // Assuming width is 0.0 (not provided in input)
-        setPlateNumber(plateNumber);
-        setSerialNumber(serialNumber);
-        setManufacture(manufacturer);
-        setManufactureDate(manufactureDate);
-        setGearType(gearType);
-        this.engine = engine;
-        this.fullWeight = fullWeight;
-        this.freeWeight = freeWeight;
+    GearType gearType, double length, Engine engine, double fullWeight, double freeWeight, double width) {
+    super(width, length, color);
+    setPlateNumber(plateNumber);
+    setSerialNumber(serialNumber);
+    setManufacture(manufacturer);
+    setManufactureDate(manufactureDate);
+    setGearType(gearType);
+    this.engine = engine;
+    this.fullWeight = fullWeight;
+    this.freeWeight = freeWeight;
     }
-
     static Scanner scanner = new Scanner(System.in);
 
     public double getFreeWeight() {
