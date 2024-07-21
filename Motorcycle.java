@@ -1,5 +1,6 @@
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Scanner;
 
 public class Motorcycle extends Automobile {
     private double tireDiameter;
@@ -20,7 +21,7 @@ public class Motorcycle extends Automobile {
         this.engine = engine;
         this.tireDiameter = tireDiameter;
 }
-
+static Scanner scanner = new Scanner(System.in);
 
     public double getTireDiameter() {
         return tireDiameter;
@@ -44,7 +45,28 @@ public class Motorcycle extends Automobile {
     public void setColor(Color color) {
         this.color = color;
     }
+    public static double getValidTireDiameter() {
+        double tireDiameter = -1; 
+        boolean isValid = false;
+        System.out.print("Enter tire Diameter: ");
 
+        while (!isValid) {
+            if (scanner.hasNextDouble()) {
+                tireDiameter = scanner.nextDouble();
+                if (tireDiameter > 0) {
+                    isValid = true;
+                } else {
+                    System.out.println("Tire diameter must be a positive number. Please enter again.");
+                }
+            } else {
+                System.out.println("Invalid input. Please enter a valid number.");
+                scanner.next(); 
+            }
+        }
+        
+        return tireDiameter;
+    }
+    
     public void print() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         System.out.println("Motorcycle Details:");
