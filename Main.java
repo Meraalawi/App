@@ -81,16 +81,13 @@ public class Main {
     private static void addVehicle(int listChoice) {
         System.out.println("Adding a new vehicle...");
         Engine engine = addEngineDetails();
-
         String plateNumber = getPlateNumber();
         String serialNumber = getSerialNumber();
-        Color color = Color.getColorFromInput();
-        System.out.print("Enter manufacturer: ");
-        String manufacturer = scanner.next();
+        Color color = Color.getColorFromInput(scanner);
+        String manufacturer = getManufacturer();
         Date manufactureDate = getDateInput("Enter manufacture date (yyyy-MM-dd): ");
-        GearType gearType = GearType.getGearTypeFromInput();
-        System.out.print("Enter length: ");
-        double length = scanner.nextDouble();
+        GearType gearType = GearType.getGearTypeFromInput(scanner);
+        double length = getLength();
 
         switch (listChoice) {
             case 1:
@@ -131,14 +128,12 @@ public class Main {
 
     private static Engine addEngineDetails() {
         System.out.println("Enter engine details:");
-        System.out.print("Enter engine manufacture: ");
-        String manufacture = scanner.next();
+        String manufacture = getManufacturer();
         Date manufactureDate = getDateInput("Enter engine manufacture date (yyyy-MM-dd): ");
-        System.out.print("Enter engine model: ");
-        String model = scanner.next();
+        String model = Engine.getEngineModel();
         int capacity = Engine.getEngineCapacity();
         int cylinder =Engine.getEngineCylinderCount();
-        FuelType fuelType = FuelType.getFuelTypeFromInput();
+        FuelType fuelType = FuelType.getFuelTypeFromInput(scanner);
         Engine engine = new Engine();
         engine.setManufacture(manufacture);
         engine.setManufactureDate(manufactureDate);
@@ -263,60 +258,65 @@ public class Main {
         System.out.println("8. Modify engine details");
         System.out.println("9. Modify chair number");
         System.out.println("10. Modify is furniture leather");
+        System.out.println("11. Modify width");
         System.out.print("Enter your choice: ");
         int choice = scanner.nextInt();
-        scanner.nextLine(); 
-
+        scanner.nextLine();
         switch (choice) {
             case 1:
-                String plateNumber = getPlateNumber();
-                System.out.println("Plate number modified successfully.");
-                break;
-            case 2:
-                String serialNumber = getSerialNumber();
-                System.out.println("Serial number modified successfully.");
-                break;
-            case 3:
-                Color color = Color.getColorFromInput();
-                System.out.println("Color modified successfully.");
-                break;
-            case 4:
-                System.out.print("Enter new manufacturer: ");
-                String manufacturer = scanner.next();
-                System.out.println("Manufacturer modified successfully.");
-                break;
-            case 5:
-                Date manufactureDate = getDateInput("Enter new manufacture date (yyyy-MM-dd): ");
-                System.out.println("Manufacture date modified successfully.");
-                break;
-            case 6:
-                GearType gearType = GearType.getGearTypeFromInput();
-                System.out.println("Gear type modified successfully.");
-                break;
-            case 7:
-                System.out.print("Enter new length: ");
-                double length = scanner.nextDouble();
-                System.out.println("Length modified successfully.");
-                break;
-            case 8:
-                modifyEngine(car.getEngine());
-                System.out.println("Engine details modified successfully.");
-                break;
-            case 9:
-                int chairNumber = getChairNumber();
-                System.out.println("Chair number modified successfully.");
-                break;
-            case 10:
-                System.out.print("Enter new value for is furniture leather (true/false): ");
-                boolean isFurnitureLeather = parseBooleanInput(scanner.next());
-                System.out.println("Is furniture leather modified successfully.");
-                break;
-            default:
-                System.out.println("Invalid choice.");
-                break;
-        }
+            String plateNumber = getPlateNumber();
+            car.setPlateNumber(plateNumber);
+            break;
+        case 2:
+            String serialNumber = getSerialNumber();
+            car.setSerialNumber(serialNumber);
+            break;
+        case 3:
+        Color color = Color.getColorFromInput(scanner);          
+        car.setColor(color);
+            break;
+        case 4:
+            System.out.print("Enter new manufacturer: ");
+            String manufacturer = getManufacturer();
+            car.setManufacture(manufacturer);
+            break;
+        case 5:
+            Date manufactureDate = getDateInput("Enter new manufacture date (yyyy-MM-dd): ");
+            car.setManufactureDate(manufactureDate);
+            break;
+        case 6:
+            GearType gearType = GearType.getGearTypeFromInput(scanner);      
+            car.setGearType(gearType);
+            break;
+        case 7:
+            System.out.print("Enter new length: ");
+            double length = getLength();
+            car.setLength(length);
+            break;
+        case 8:
+            modifyEngine(car.getEngine());
+            break;
+        case 9:
+            int chairNumber = getChairNumber();
+            car.setChairNumber(chairNumber);
+            break;
+        case 10:
+            System.out.print("Enter new value for is furniture leather (true/false): ");
+            boolean isFurnitureLeather = parseBooleanInput(scanner.next());
+            car.setIsFurnitureLeather(isFurnitureLeather);
+            case 11:
+            System.out.print("Enter new width: ");
+            double width = scanner.nextDouble();
+            car.setWidth(width);
+            break;
+        default:
+            System.out.println("Invalid choice.");
+            break;
     }
-    
+    System.out.println("Modification completed successfully.");
+
+        }
+
     private static void modifyTruck(Truck truck) {
         System.out.println("Modifying truck:");
         System.out.println("1. Modify plate number");
@@ -329,61 +329,65 @@ public class Main {
         System.out.println("8. Modify engine details");
         System.out.println("9. Modify full weight capacity");
         System.out.println("10. Modify free weight capacity");
+        System.out.println("11. Modify width");
         System.out.print("Enter your choice: ");
         int choice = scanner.nextInt();
-        scanner.nextLine(); // Consume newline character
-    
+        scanner.nextLine(); 
         switch (choice) {
             case 1:
                 String plateNumber = getPlateNumber();
-                System.out.println("Plate number modified successfully.");
+                truck.setPlateNumber(plateNumber);
                 break;
             case 2:
                 String serialNumber = getSerialNumber();
-                System.out.println("Serial number modified successfully.");
+                truck.setSerialNumber(serialNumber);
                 break;
             case 3:
-                Color color = Color.getColorFromInput();
-                System.out.println("Color modified successfully.");
+                Color color = Color.getColorFromInput(scanner);
+                truck.setColor(color);
                 break;
             case 4:
                 System.out.print("Enter new manufacturer: ");
-                String manufacturer = scanner.next();
-                System.out.println("Manufacturer modified successfully.");
+                String manufacturer = getManufacturer();
+                truck.setManufacture(manufacturer);
                 break;
             case 5:
                 Date manufactureDate = getDateInput("Enter new manufacture date (yyyy-MM-dd): ");
-                System.out.println("Manufacture date modified successfully.");
+                truck.setManufactureDate(manufactureDate);
                 break;
             case 6:
-                GearType gearType = GearType.getGearTypeFromInput();
-                System.out.println("Gear type modified successfully.");
+                GearType gearType = GearType.getGearTypeFromInput(scanner);  
+                truck.setGearType(gearType);
                 break;
             case 7:
                 System.out.print("Enter new length: ");
-                double length = scanner.nextDouble();
-                System.out.println("Length modified successfully.");
+                double length = getLength();
+                truck.setLength(length);
                 break;
             case 8:
-                modifyEngine(truck.getEngine());   
-                System.out.println("Engine details modified successfully.");
+                modifyEngine(truck.getEngine());
                 break;
             case 9:
                 System.out.print("Enter new full weight capacity: ");
                 double fullWeight = scanner.nextDouble();
-                System.out.println("Full weight capacity modified successfully.");
+                truck.setFullWeight(fullWeight);
                 break;
             case 10:
                 System.out.print("Enter new free weight capacity: ");
                 double freeWeight = scanner.nextDouble();
-                System.out.println("Free weight capacity modified successfully.");
+                truck.setFreeWeight(freeWeight);
+                break;
+            case 11:
+                System.out.print("Enter new width: ");
+                double width = scanner.nextDouble();
+                truck.setWidth(width);
                 break;
             default:
                 System.out.println("Invalid choice.");
                 break;
         }
-    }
-    
+        System.out.println("Modification completed successfully.");
+    }    
     private static void modifyMotorcycle(Motorcycle motorcycle) {
         System.out.println("Modifying motorcycle:");
         System.out.println("1. Modify plate number");
@@ -397,53 +401,55 @@ public class Main {
         System.out.println("9. Modify tire diameter");
         System.out.print("Enter your choice: ");
         int choice = scanner.nextInt();
-        scanner.nextLine(); // Consume newline character
+        scanner.nextLine(); 
     
         switch (choice) {
             case 1:
                 String plateNumber = getPlateNumber();
-                System.out.println("Plate number modified successfully.");
+                motorcycle.setPlateNumber(plateNumber);
                 break;
             case 2:
                 String serialNumber = getSerialNumber();
-                System.out.println("Serial number modified successfully.");
+                motorcycle.setSerialNumber(serialNumber);
                 break;
             case 3:
-                Color color = Color.getColorFromInput();
-                System.out.println("Color modified successfully.");
+            Color color = Color.getColorFromInput(scanner);
+                motorcycle.setColor(color);
                 break;
             case 4:
                 System.out.print("Enter new manufacturer: ");
-                String manufacturer = scanner.next();
-                System.out.println("Manufacturer modified successfully.");
+                String manufacturer = getManufacturer();
+                motorcycle.setManufacture(manufacturer);
                 break;
             case 5:
                 Date manufactureDate = getDateInput("Enter new manufacture date (yyyy-MM-dd): ");
-                System.out.println("Manufacture date modified successfully.");
+                motorcycle.setManufactureDate(manufactureDate);
                 break;
             case 6:
-                GearType gearType = GearType.getGearTypeFromInput();
-                System.out.println("Gear type modified successfully.");
+                GearType gearType = GearType.getGearTypeFromInput(scanner);    
+                motorcycle.setGearType(gearType);
                 break;
             case 7:
                 System.out.print("Enter new length: ");
-                double length = scanner.nextDouble();
-                System.out.println("Length modified successfully.");
+                double length = getLength();
+                motorcycle.setLength(length);
                 break;
             case 8:
-                modifyEngine(motorcycle.getEngine());   
-                System.out.println("Engine details modified successfully.");
+                modifyEngine(motorcycle.getEngine());
                 break;
             case 9:
                 System.out.print("Enter new tire diameter: ");
                 double tireDiameter = scanner.nextDouble();
-                System.out.println("Tire diameter modified successfully.");
+                motorcycle.setTireDiameter(tireDiameter);
                 break;
             default:
                 System.out.println("Invalid choice.");
                 break;
-        }}
-        private static void modifyEngine(Engine engine) {
+        }
+        System.out.println("Modification completed successfully.");
+
+    }       
+    private static void modifyEngine(Engine engine) {
             System.out.println("Modifying engine details:");
             System.out.println("1. Modify engine manufacturer");
             System.out.println("2. Modify engine manufacture date");
@@ -453,34 +459,43 @@ public class Main {
             System.out.println("6. Modify engine fuel type");
             System.out.print("Enter your choice: ");
             int engineChoice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline character
+            scanner.nextLine(); 
         
             switch (engineChoice) {
                 case 1:
                     System.out.print("Enter new engine manufacturer: ");
-                    String manufacture = scanner.next();
+                    String manufacturer = getManufacturer();
+                    engine.setManufacture(manufacturer);
                     break;
                 case 2:
                     Date manufactureDate = getDateInput("Enter new engine manufacture date (yyyy-MM-dd): ");
+                    engine.setManufactureDate(manufactureDate);
                     break;
                 case 3:
                     System.out.print("Enter new engine model: ");
-                    String model = scanner.next();
+                    String model = Engine.getEngineModel();
+                    engine.setModel(model);
                     break;
                 case 4:
+                    System.out.print("Enter new engine capacity: ");
                     int capacity = Engine.getEngineCapacity();
+                    engine.setCapacity(capacity);
                     break;
                 case 5:
-                    int cylinder = Engine.getEngineCylinderCount();
+                    System.out.print("Enter new engine cylinder count: ");
+                    int cylinderCount = Engine.getEngineCylinderCount();
+                    engine.setCylinder(cylinderCount);
                     break;
                 case 6:
-                    FuelType fuelType = FuelType.getFuelTypeFromInput();
+                    FuelType fuelType = FuelType.getFuelTypeFromInput(scanner); 
+                    engine.setFuelType(fuelType);
                     break;
                 default:
                     System.out.println("Invalid engine detail choice.");
                     break;
             }
-    }    
+        }    
+        
     private static String getPlateNumber() {
         String plateNumber;
         do {
@@ -504,15 +519,16 @@ public class Main {
             System.out.print("Enter width: ");
             if (scanner.hasNextDouble()) {
                 width = scanner.nextDouble();
-                scanner.nextLine(); // Consume newline character
+                scanner.nextLine(); 
             } else {
                 System.out.println("Invalid input. Please enter a valid number.");
-                scanner.nextLine(); // Consume newline character to clear buffer
+                scanner.nextLine(); 
             }
         }
         return width;
     }
-            private static int getChairNumber() {
+            
+    private static int getChairNumber() {
         int chairNumber = 0;
         boolean validInput = false;
         
@@ -522,7 +538,7 @@ public class Main {
             chairNumber = scanner.nextInt();
             
             if (chairNumber >= 2 && chairNumber <= 9) {
-                validInput = true; // Valid input, set flag to true
+                validInput = true; 
             } else {
                 System.out.println("Chair number must be between 2 and 9.");
                 System.out.print("Enter chair number (between 2 and 9): ");
@@ -544,7 +560,6 @@ private static Date getDateInput(String promptMessage) {
             String dateStr = scanner.next();
             parsedDate = dateFormat.parse(dateStr);
 
-            // Validate that the date is 1950 or later
             Date minDate = dateFormat.parse("1950-01-01");
             if (parsedDate.compareTo(minDate) < 0) {
                 System.out.println("Manufacture date must be 1950 or later.");
@@ -560,5 +575,32 @@ private static Date getDateInput(String promptMessage) {
     }
 
     return parsedDate;
+}
+private static int getLength() {
+    int length;
+    while (true) {
+        System.out.print("Enter a valid length (1-31): "); 
+        if (scanner.hasNextInt()) {
+            length = scanner.nextInt();
+            if (length >= 1 && length <= 31) { 
+                return length;
+            }
+        } else {
+            scanner.next(); 
+        }
+        System.out.println("Invalid number. Please enter a positive number between 1 and 31.");
+    }
+}
+private static String getManufacturer() {
+    String manufacturer;
+    while (true) {
+        System.out.print("Enter manufacturer name (letters only, length 1-50): ");
+        manufacturer = scanner.nextLine().trim();
+        if (manufacturer.matches("[a-zA-Z ]{1,50}")) { 
+            return manufacturer;
+        } else {
+            System.out.println("Invalid input. Please enter a valid manufacturer name (letters only, length 1-50).");
+        }
+    }
 }
 }
