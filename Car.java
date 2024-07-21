@@ -1,4 +1,3 @@
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 
 public class Car extends Vehicle {
@@ -22,15 +21,15 @@ public class Car extends Vehicle {
     public Car(String plateNumber, String serialNumber, Color color, String manufacturer, java.util.Date manufactureDate,
     GearType gearType, double length, Engine engine, int chairNumber, boolean isFurnitureLeather) {
         super(0.0, length, color);
-       setPlateNumber(plateNumber);
-       setSerialNumber(serialNumber);
-       setManufacture(manufacturer);
-       setManufactureDate(manufactureDate);
-       setGearType(gearType);
-       this.engine = engine;
-       this.chairNumber = chairNumber;
-       this.isFurnitureLeather = isFurnitureLeather;
-   }
+    setPlateNumber(plateNumber);
+    setSerialNumber(serialNumber);
+    setManufacture(manufacturer);
+    setManufactureDate(manufactureDate);
+    setGearType(gearType);
+    this.engine = engine;
+    this.chairNumber = chairNumber;
+    this.isFurnitureLeather = isFurnitureLeather;
+    }
 
 
     public Engine getEngine() {
