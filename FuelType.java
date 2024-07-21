@@ -1,39 +1,30 @@
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
+
 enum FuelType {
-    NOT_DEFINE, 
+    NOT_DEFINE,
     DIESEL,
     GASOLINE,
-    HYBIRD,
-    ELCTRIC;
-    private static final Scanner scanner = new Scanner(System.in);
+    ELECTRIC,
+    HYBRID;
 
-    public static FuelType getFuelTypeFromInput() {
-        Map<Integer, FuelType> fuelTypeMap = new HashMap<>();
-        System.out.println("Enter fuel type:\n1: NOT_DEFINE\n2: Diesel\n3: Gasoline\n4: Electric\n5: Hybrid");
+    public static FuelType getFuelTypeFromInput(Scanner scanner) {
+        System.out.println("Enter fuel type:");
+        for (int i = 1; i < FuelType.values().length; i++) {
+            System.out.println(i + ": " + FuelType.values()[i]);
+        }
 
-        fuelTypeMap.put(1, FuelType.NOT_DEFINE);
-        fuelTypeMap.put(2, FuelType.DIESEL);
-        fuelTypeMap.put(3, FuelType.GASOLINE);
-        fuelTypeMap.put(4, FuelType.ELCTRIC);
-        fuelTypeMap.put(5, FuelType.HYBIRD);
-
-        int choice = getUserChoice(fuelTypeMap.size());
-
-        return fuelTypeMap.get(choice);
-    }
-    private static int getUserChoice(int numOptions) {
-        Scanner scanner = new Scanner(System.in);
         int choice;
-        do {
-            System.out.print("Enter your choice (1-" + numOptions + "): ");
-            while (!scanner.hasNextInt()) {
-                System.out.println("Invalid input. Please enter a number.");
-                scanner.next();
+        while (true) {
+            System.out.print("Enter your choice (1-" + (FuelType.values().length - 1) + "): ");
+            if (scanner.hasNextInt()) {
+                choice = scanner.nextInt();
+                if (choice >= 1 && choice < FuelType.values().length) {
+                    return FuelType.values()[choice];
+                }
+            } else {
+                scanner.next(); // Clear invalid input
             }
-            choice = scanner.nextInt();
-        } while (choice < 1 || choice > numOptions);
-        return choice;
+            System.out.println("Invalid choice. Please try again.");
+        }
     }
 }
