@@ -81,6 +81,18 @@ public class Engine {
         } while (capacity > 1350);
         return capacity;
     }
+    public static String getEngineModel() {
+        String engineModel;
+        while (true) {
+            System.out.print("Enter engine model (alphanumeric only, length 1-50): ");
+            engineModel = scanner.nextLine().trim();
+            if (engineModel.matches("[a-zA-Z0-9 ]{1,50}")) { 
+                return engineModel;
+            } else {
+                System.out.println("Invalid input. Please enter a valid engine model (alphanumeric only, length 1-50).");
+            }
+        }
+    }
 
 
     public void print() {
