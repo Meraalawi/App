@@ -56,23 +56,17 @@ public class Main {
             scanner.nextLine();
 
             switch (operationChoice) {
-                case 1:
-                    addVehicle(listChoice);
-                    break;
-                case 2:
-                    searchVehicle(listChoice);
-                    break;
-                case 3:
-                    deleteVehicle(listChoice);
-                    break;
-                case 4:
-                    modifyVehicle(listChoice);
-                    break;
-                case 5:
+                case 1 -> addVehicle(listChoice);
+                case 2 -> searchVehicle(listChoice);
+                case 3 -> deleteVehicle(listChoice);
+                case 4 -> modifyVehicle(listChoice);
+                case 5 -> {
                     return; // Go back to choose another list
-                case 6:
+                }
+                case 6 -> {
                     System.out.println("Exiting program.");
                     System.exit(0);
+                }
             }
         }
     }
@@ -83,40 +77,36 @@ public class Main {
         Engine engine = addEngineDetails();
         String plateNumber = getPlateNumber();
         String serialNumber = getSerialNumber();
-        Color color = Color.getColorFromInput(scanner);
+        Color color = Color.getColorFromInput();
         String manufacturer = getManufacturer();
         Date manufactureDate = getDateInput("Enter manufacture date (yyyy-MM-dd): ");
-        GearType gearType = GearType.getGearTypeFromInput(scanner);
+        GearType gearType = GearType.getGearTypeFromInput();
         double length = getLength();
-
+        double width = getWidth(listChoice);
         switch (listChoice) {
-            case 1:
+            case 1 -> {
                 int chairNumber = getChairNumber();
                 System.out.print("Is furniture leather? (true/false): ");
                 boolean isFurnitureLeather = parseBooleanInput();
-                Car newCar = new Car(plateNumber, serialNumber, color, manufacturer, manufactureDate, gearType, length, engine, chairNumber, isFurnitureLeather);
+                Car newCar = new Car(plateNumber, serialNumber, color, manufacturer, manufactureDate, gearType, length, engine, chairNumber, isFurnitureLeather, width);
                 ((ArrayList<Car>) automobileMap.get(listChoice)).add(newCar);
-                newCar.setWidth(getWidth(listChoice));
-                newCar.print();
                 System.out.println("Car added successfully.");
-                break;
+            }
         
-            case 2:
+            case 2 -> {
                 double fullWeight = Truck.getValidWeight("Enter full Weight capacity: ");
                 double freeWeight = Truck.getValidWeight("Enter free Weight capacity: ");
-                Truck newTruck = new Truck(plateNumber, serialNumber, color, manufacturer, manufactureDate, gearType, length, engine, fullWeight, freeWeight);
-                newTruck.setWidth(getWidth(listChoice));
+                Truck newTruck = new Truck(plateNumber, serialNumber, color, manufacturer, manufactureDate, gearType, length, engine, fullWeight, freeWeight, width);
                 ((ArrayList<Truck>) (automobileMap.get(listChoice))).add(newTruck);
                 System.out.println("Truck added successfully.");
-                break;
-            case 3:
+            }
+            case 3 -> {
                 double tireDiameter =  Motorcycle.getValidTireDiameter();
                 Motorcycle newMotorcycle = new Motorcycle(plateNumber, serialNumber, color, manufacturer, manufactureDate, gearType, length, engine, tireDiameter);
                 ((ArrayList<Motorcycle>) automobileMap.get(listChoice)).add(newMotorcycle);
                 System.out.println("Motorcycle added successfully.");
-                break;
-            default:
-                System.out.println("Invalid vehicle type..try again");
+            }
+            default -> System.out.println("Invalid vehicle type..try again");
         }
     }
     private static boolean parseBooleanInput() {
@@ -124,12 +114,14 @@ public class Main {
         while (true) {
             System.out.print("Is furniture leather? (t/f): ");
             input = scanner.next().trim().toLowerCase();
-            if (input.equals("t")) {
-                return true;
-            } else if (input.equals("f")) {
-                return false;
-            } else {
-                System.out.println("Invalid input. Please enter 't' for true or 'f' for false.");
+            switch (input) {
+                case "t" -> {
+                    return true;
+                }
+                case "f" -> {
+                    return false;
+                }
+                default -> System.out.println("Invalid input. Please enter 't' for true or 'f' for false.");
             }
         }
     }
@@ -140,14 +132,8 @@ public class Main {
         String model = Engine.getEngineModel();
         int capacity = Engine.getEngineCapacity();
         int cylinder =Engine.getEngineCylinderCount();
-        FuelType fuelType = FuelType.getFuelTypeFromInput(scanner);
-        Engine engine = new Engine();
-        engine.setManufacture(manufacture);
-        engine.setManufactureDate(manufactureDate);
-        engine.setModel(model);
-        engine.setCapacity(capacity);
-        engine.setCylinder(cylinder);
-        engine.setFuelType(fuelType);
+        FuelType fuelType = FuelType.getFuelTypeFromInput();
+        Engine engine = new Engine(manufacture,manufactureDate,model,capacity,cylinder,fuelType);
         return engine;
     }
 
@@ -279,7 +265,7 @@ public class Main {
                 car.setSerialNumber(serialNumber);
                 break;
             case 3:
-                Color color = Color.getColorFromInput(scanner);
+                Color color = Color.getColorFromInput();
                 car.setColor(color);
                 break;
             case 4:
@@ -291,7 +277,7 @@ public class Main {
                 car.setManufactureDate(manufactureDate);
                 break;
             case 6:
-                GearType gearType = GearType.getGearTypeFromInput(scanner);
+                GearType gearType = GearType.getGearTypeFromInput();
                 car.setGearType(gearType);
                 break;
             case 7:
@@ -338,53 +324,49 @@ public class Main {
         int choice = scanner.nextInt();
         scanner.nextLine(); 
         switch (choice) {
-            case 1:
+            case 1 -> {
                 String plateNumber = getPlateNumber();
                 truck.setPlateNumber(plateNumber);
-                break;
-            case 2:
+            }
+            case 2 -> {
                 String serialNumber = getSerialNumber();
                 truck.setSerialNumber(serialNumber);
-                break;
-            case 3:
-                Color color = Color.getColorFromInput(scanner);
+            }
+            case 3 -> {
+                Color color = Color.getColorFromInput();
                 truck.setColor(color);
-                break;
-            case 4:
+            }
+            case 4 -> {
                 String manufacturer = getManufacturer();
                 truck.setManufacture(manufacturer);
-                break;
-            case 5:
+            }
+            case 5 -> {
                 Date manufactureDate = getDateInput("Enter new manufacture date (yyyy-MM-dd): ");
                 truck.setManufactureDate(manufactureDate);
-                break;
-            case 6:
-                GearType gearType = GearType.getGearTypeFromInput(scanner);  
+            }
+            case 6 -> {
+                GearType gearType = GearType.getGearTypeFromInput();
                 truck.setGearType(gearType);
-                break;
-            case 7:
+            }
+            case 7 -> {
                 double length = getLength();
                 truck.setLength(length);
-                break;
-            case 8:
-                modifyEngine(truck.getEngine());
-                break;
-            case 9:
+            }
+            case 8 -> modifyEngine(truck.getEngine());
+            case 9 -> {
                 double fullWeight = Truck.getValidWeight("Enter full Weight capacity: ");
                 truck.setFullWeight(fullWeight);
-                break;
-            case 10:
+            }
+            case 10 -> {
                 double freeWeight = Truck.getValidWeight("Enter free Weight capacity: ");
                 truck.setFreeWeight(freeWeight);
-                break;
-            case 11:
+            }
+            case 11 -> {
                 System.out.print("Enter new width: ");
                 double width = scanner.nextDouble();
                 truck.setWidth(width);
-                break;
-            default:
-                System.out.println("Invalid choice.");
-                break;
+            }
+            default -> System.out.println("Invalid choice.");
         }
         System.out.println("Modification completed successfully.");
     }    
@@ -404,44 +386,40 @@ public class Main {
         scanner.nextLine(); 
     
         switch (choice) {
-            case 1:
+            case 1 -> {
                 String plateNumber = getPlateNumber();
                 motorcycle.setPlateNumber(plateNumber);
-                break;
-            case 2:
+            }
+            case 2 -> {
                 String serialNumber = getSerialNumber();
                 motorcycle.setSerialNumber(serialNumber);
-                break;
-            case 3:
-                Color color = Color.getColorFromInput(scanner);
+            }
+            case 3 -> {
+                Color color = Color.getColorFromInput();
                 motorcycle.setColor(color);
-                break;
-            case 4:
+            }
+            case 4 -> {
                 String manufacturer = getManufacturer();
                 motorcycle.setManufacture(manufacturer);
-                break;
-            case 5:
+            }
+            case 5 -> {
                 Date manufactureDate = getDateInput("Enter new manufacture date (yyyy-MM-dd): ");
                 motorcycle.setManufactureDate(manufactureDate);
-                break;
-            case 6:
-                GearType gearType = GearType.getGearTypeFromInput(scanner);
+            }
+            case 6 -> {
+                GearType gearType = GearType.getGearTypeFromInput();
                 motorcycle.setGearType(gearType);
-                break;
-            case 7:
+            }
+            case 7 -> {
                 double length = getLength();
                 motorcycle.setLength(length);
-                break;
-            case 8:
-                modifyEngine(motorcycle.getEngine());
-                break;
-            case 9:
+            }
+            case 8 -> modifyEngine(motorcycle.getEngine());
+            case 9 -> {
                 double tireDiameter = Motorcycle.getValidTireDiameter();
                 motorcycle.setTireDiameter(tireDiameter);
-                break;
-            default:
-                System.out.println("Invalid choice.");
-                break;
+            }
+            default -> System.out.println("Invalid choice.");
         }
         System.out.println("Modification completed successfully.");
 
@@ -459,33 +437,31 @@ public class Main {
             scanner.nextLine(); 
         
             switch (engineChoice) {
-                case 1:
+                case 1 -> {
                     String manufacturer = getManufacturer();
                     engine.setManufacture(manufacturer);
-                    break;
-                case 2:
+            }
+                case 2 -> {
                     Date manufactureDate = getDateInput("Enter new engine manufacture date (yyyy-MM-dd): ");
                     engine.setManufactureDate(manufactureDate);
-                    break;
-                case 3:
+            }
+                case 3 -> {
                     String model = Engine.getEngineModel();
                     engine.setModel(model);
-                    break;
-                case 4:
+            }
+                case 4 -> {
                     int capacity = Engine.getEngineCapacity();
                     engine.setCapacity(capacity);
-                    break;
-                case 5:
+            }
+                case 5 -> {
                     int cylinderCount = Engine.getEngineCylinderCount();
                     engine.setCylinder(cylinderCount);
-                    break;
-                case 6:
-                    FuelType fuelType = FuelType.getFuelTypeFromInput(scanner); 
+            }
+                case 6 -> {
+                    FuelType fuelType = FuelType.getFuelTypeFromInput(); 
                     engine.setFuelType(fuelType);
-                    break;
-                default:
-                    System.out.println("Invalid engine detail choice.");
-                    break;
+            }
+                default -> System.out.println("Invalid engine detail choice.");
             }
         }    
         
@@ -523,24 +499,21 @@ public class Main {
             
     private static int getChairNumber() {
         int chairNumber = 0;
-        boolean validInput = false;
         
+
         System.out.print("Enter chair number (between 2 and 9): ");
-        
-    
-            chairNumber = scanner.nextInt();
-            
-            if (chairNumber >= 2 && chairNumber <= 9) {
-                validInput = true; 
+            if (scanner.hasNextInt()) {
+                chairNumber = scanner.nextInt();
+                if (chairNumber >= 2 && chairNumber <= 9) {
+                } else {
+                    System.out.println("Chair number must be between 2 and 9.");
+                }
             } else {
-                System.out.println("Chair number must be between 2 and 9.");
-                System.out.print("Enter chair number (between 2 and 9): ");
+                System.out.println("Invalid input. Please enter a number between 2 and 9.");
+                scanner.next(); // Clear invalid input
             }
-        
-        
         return chairNumber;
-    }
-    
+    }    
 
 private static Date getDateInput(String promptMessage) {
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
