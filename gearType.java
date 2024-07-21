@@ -4,8 +4,9 @@ enum GearType {
     NOT_DEFINE,
     NORMAL,
     AUTOMATIC;
+    static Scanner scanner = new Scanner(System.in);
 
-    public static GearType getGearTypeFromInput(Scanner scanner) {
+    public static GearType getGearTypeFromInput() {
         System.out.println("Enter gear type:");
         for (int i = 1; i < GearType.values().length; i++) {
             System.out.println(i + ": " + GearType.values()[i]);

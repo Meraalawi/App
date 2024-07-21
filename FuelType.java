@@ -6,8 +6,9 @@ enum FuelType {
     GASOLINE,
     ELECTRIC,
     HYBRID;
+    static Scanner scanner = new Scanner(System.in);
 
-    public static FuelType getFuelTypeFromInput(Scanner scanner) {
+    public static FuelType getFuelTypeFromInput() {
         System.out.println("Enter fuel type:");
         for (int i = 1; i < FuelType.values().length; i++) {
             System.out.println(i + ": " + FuelType.values()[i]);

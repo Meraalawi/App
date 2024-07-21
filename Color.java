@@ -8,8 +8,9 @@ enum Color {
     BLUE,
     GREEN,
     YELLOW;
+    static Scanner scanner = new Scanner(System.in);
 
-    public static Color getColorFromInput(Scanner scanner) {
+    public static Color getColorFromInput() {
         System.out.println("Enter color:");
         for (int i = 1; i < Color.values().length; i++) {
             System.out.println(i + ": " + Color.values()[i]);
