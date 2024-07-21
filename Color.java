@@ -1,6 +1,5 @@
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
+
 enum Color {
     NOT_DEFINE,
     RED,
@@ -9,23 +8,25 @@ enum Color {
     BLUE,
     GREEN,
     YELLOW;
-    private static final Map<Integer, Color> colorMap = new HashMap<>();
-    
-    static {
-        colorMap.put(1, RED);
-        colorMap.put(2, WHITE);
-        colorMap.put(3, BLACK);
-        colorMap.put(4, BLUE);
-        colorMap.put(5, GREEN);
-        colorMap.put(6, YELLOW);
+
+    public static Color getColorFromInput(Scanner scanner) {
+        System.out.println("Enter color:");
+        for (int i = 1; i < Color.values().length; i++) {
+            System.out.println(i + ": " + Color.values()[i]);
+        }
+
+        int choice;
+        while (true) {
+            System.out.print("Enter your choice (1-" + (Color.values().length - 1) + "): ");
+            if (scanner.hasNextInt()) {
+                choice = scanner.nextInt();
+                if (choice >= 1 && choice < Color.values().length) {
+                    return Color.values()[choice];
+                }
+            } else {
+                scanner.next(); 
+            }
+            System.out.println("Invalid choice. Please try again.");
+        }
     }
-    public static Color getColorFromInput() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter color:\n1: RED\n2: WHITE\n3: BLACK\n4: BLUE\n5: GREEN\n6: YELLOW\n");
-        int choice = scanner.nextInt();
-
-        return colorMap.getOrDefault(choice, NOT_DEFINE);
-
-    }
-
 }
