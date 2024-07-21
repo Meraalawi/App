@@ -4,7 +4,8 @@ import java.util.Date;
 public class Motorcycle extends Automobile {
     private double tireDiameter;
     private double length;
-     Engine engine;
+    Engine engine;
+    private Color color; // Add this if not present
 
     public Motorcycle() {
         super(null, new Date(), null, null, null, null, null);
@@ -35,6 +36,13 @@ public class Motorcycle extends Automobile {
 
     public void setLength(double length) {
         this.length = length;
+    }
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 
     public void print() {
