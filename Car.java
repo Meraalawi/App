@@ -9,7 +9,7 @@ public class Car extends Vehicle {
         super(0.0, 0.0, null);
         this.chairNumber = 0;
         this.isFurnitureLeather = true;
-        this.engine = new Engine();
+        this.engine = engine;
     }
     public Car(int chairNumber, boolean isFurnitureLeather, double width, double length, Color color,Engine engine) {
         super(width, length, color);
@@ -19,18 +19,17 @@ public class Car extends Vehicle {
     }
 
     public Car(String plateNumber, String serialNumber, Color color, String manufacturer, java.util.Date manufactureDate,
-    GearType gearType, double length, Engine engine, int chairNumber, boolean isFurnitureLeather) {
-        super(0.0, length, color);
-    setPlateNumber(plateNumber);
-    setSerialNumber(serialNumber);
-    setManufacture(manufacturer);
-    setManufactureDate(manufactureDate);
-    setGearType(gearType);
-    this.engine = engine;
-    this.chairNumber = chairNumber;
-    this.isFurnitureLeather = isFurnitureLeather;
-    }
-
+    GearType gearType, double length, Engine engine, int chairNumber, boolean isFurnitureLeather, double width) {
+super(width, length, color);
+setPlateNumber(plateNumber);
+setSerialNumber(serialNumber);
+setManufacture(manufacturer);
+setManufactureDate(manufactureDate);
+setGearType(gearType);
+this.engine = engine;
+this.chairNumber = chairNumber;
+this.isFurnitureLeather = isFurnitureLeather;
+}
 
     public Engine getEngine() {
         return engine;
