@@ -86,7 +86,6 @@ public class Main {
         switch (listChoice) {
             case 1 -> {
                 int chairNumber = getChairNumber();
-                System.out.print("Is furniture leather? (true/false): ");
                 boolean isFurnitureLeather = parseBooleanInput();
                 Car newCar = new Car(plateNumber, serialNumber, color, manufacturer, manufactureDate, gearType, length, engine, chairNumber, isFurnitureLeather, width);
                 ((ArrayList<Car>) automobileMap.get(listChoice)).add(newCar);
