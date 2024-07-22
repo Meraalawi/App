@@ -6,13 +6,8 @@ public class Motorcycle extends Automobile {
     private double tireDiameter;
     private double length;
     Engine engine;
-    private Color color; // Add this if not present
+    private Color color; 
 
-    public Motorcycle() {
-        super(null, new Date(), null, null, null, null, null);
-        this.tireDiameter = 0.0;
-        this.length = 0.0;
-    }
 
     public Motorcycle(String plateNumber, String serialNumber, Color color, String manufacturer, Date manufactureDate,
         GearType gearType, double length, Engine engine, double tireDiameter) {

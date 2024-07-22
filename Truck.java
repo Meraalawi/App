@@ -5,11 +5,6 @@ public class Truck extends Vehicle {
     private double freeWeight;
     private double fullWeight;
     Engine engine;
-    public Truck() {
-        super(0.0, 0.0, null);
-        this.freeWeight = 0.0;
-        this.fullWeight = 0.0;
-    }
 
     public Truck(String plateNumber, String serialNumber, Color color, String manufacturer, Date manufactureDate,
     GearType gearType, double length, Engine engine, double fullWeight, double freeWeight, double width) {
@@ -47,7 +42,7 @@ public class Truck extends Vehicle {
             System.out.print(prompt);
             while (!scanner.hasNextDouble()) {
                 System.out.println("Invalid input. Please enter a valid number.");
-                scanner.next(); // clear the invalid input
+                scanner.next(); 
                 System.out.print(prompt);
             }
             weight = scanner.nextDouble();
