@@ -7,8 +7,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 
-public class VehicleManager implements VehicleOperations {
-
+public class VehicleManager  {
     private final Map<Integer, Object> automobileMap = new HashMap<>();
     private final Scanner scanner = new Scanner(System.in);
 
@@ -69,7 +68,6 @@ public class VehicleManager implements VehicleOperations {
     }
 
     @SuppressWarnings("unchecked")
-    @Override
     public void addVehicle(int listChoice) {
         System.out.println("Adding a new vehicle...");
         Engine engine = addEngineDetails();
@@ -108,7 +106,6 @@ public class VehicleManager implements VehicleOperations {
     }
 
     @SuppressWarnings("unchecked")
-    @Override
     public void searchVehicle(int listChoice) {
         System.out.print("Enter the plate number or serial number of the vehicle you want to search: ");
         String searchTerm = scanner.next();
@@ -139,7 +136,6 @@ public class VehicleManager implements VehicleOperations {
     }
 
     @SuppressWarnings("unchecked")
-    @Override
     public void deleteVehicle(int listChoice) {
         System.out.print("Enter the plate number or serial number of the vehicle you want to delete: ");
         String searchTerm = scanner.next();
@@ -169,7 +165,6 @@ public class VehicleManager implements VehicleOperations {
         }
     }
 
-    @Override
     public void modifyVehicle(int listChoice) {
         System.out.print("Enter the plate number or serial number of the vehicle you want to modify: ");
         String searchTerm = scanner.next();
@@ -233,7 +228,7 @@ public class VehicleManager implements VehicleOperations {
             case 8 -> car.setEngine(addEngineDetails());
             case 9 -> car.setChairNumber(getChairNumber());
             case 10 -> car.setIsFurnitureLeather(parseBooleanInput());
-            case 11 -> car.setWidth(getWidth(choice));
+            case 11 -> car.setWidth(getWidth(1));
             default -> System.out.println("Invalid choice.");
         }
     }
@@ -265,7 +260,7 @@ public class VehicleManager implements VehicleOperations {
             case 8 -> truck.setEngine(addEngineDetails());
             case 9 -> truck.setFullWeight(Truck.getValidWeight("Enter full Weight capacity: "));
             case 10 -> truck.setFreeWeight(Truck.getValidWeight("Enter free Weight capacity: "));
-            case 11 -> truck.setWidth(getWidth(choice));
+            case 11 -> truck.setWidth(getWidth(2));
             default -> System.out.println("Invalid choice.");
         }
     }
@@ -339,7 +334,6 @@ public class VehicleManager implements VehicleOperations {
         }
         return width;
     }
-            
     public  int getChairNumber() {
         int chairNumber = 0;
         
@@ -358,7 +352,7 @@ public class VehicleManager implements VehicleOperations {
         return chairNumber;
     }    
 
-public  Date getDateInput(String promptMessage) {
+    public  Date getDateInput(String promptMessage) {
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     dateFormat.setLenient(false);
     Date parsedDate = null;
@@ -401,18 +395,15 @@ public int getLength() {
     }
 }
 
-public  String getManufacturer() {
+public String getManufacturer() {
     String manufacturer;
-    while (true) {
+    do {
         System.out.print("Enter manufacturer name (letters only, length 1-50): ");
         manufacturer = scanner.nextLine().trim();
-        if (manufacturer.matches("[a-zA-Z ]{1,50}")) { 
-            return manufacturer;
-        } else {
-            System.out.println("Invalid input. Please enter a valid manufacturer name (letters only, length 1-50).");
-        }
-    }
+    } while (!manufacturer.matches("^[a-zA-Z ]{1,50}$"));
+    return manufacturer;
 }
+
 
 public boolean parseBooleanInput() {
         String input;
