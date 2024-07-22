@@ -3,11 +3,6 @@ class Vehicle extends Automobile {
     private double length;
     private Color color;
 
-    public Vehicle(){
-        this.width = 0.0;
-        this.length = 0.0;
-        this.color = null;
-    }
     public Vehicle(double width, double length, Color color) {
         this.width = width;
         this.length = length;
