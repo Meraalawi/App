@@ -19,14 +19,14 @@ public class Automobile {
         this.serialNumber = null;
     }
 
-    public Automobile(String manufacture, Date manufactureDate, Engine engine, String plateNumber, FuelType fuelType, GearType gearType, String serialNumber) {
-        this.manufacture = manufacture;
-        this.manufactureDate = manufactureDate;
-        this.engine = engine;
-        this.plateNumber = plateNumber;
-        this.fuelType = fuelType;
-        this.gearType = gearType;
-        this.serialNumber = serialNumber;
+    public Automobile(String ـmanufacture, Date ـmanufactureDate, Engine ـengine, String ـplateNumber, FuelType ـfuelType, GearType ـgearType, String ـserialNumber) {
+        this.manufacture = ـmanufacture;
+        this.manufactureDate = ـmanufactureDate;
+        this.engine = ـengine;
+        this.plateNumber = ـplateNumber;
+        this.fuelType = ـfuelType;
+        this.gearType = ـgearType;
+        this.serialNumber = ـserialNumber;
     }
 
     public String getManufacture() {
