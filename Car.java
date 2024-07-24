@@ -8,15 +8,18 @@ public class Car extends Vehicle {
 
     public Car(String _plateNumber, String _serialNumber, Color _color, String _manufacturer, Date _manufactureDate,
     GearType _gearType, double _length, Engine _engine, int _chairNumber, boolean _isFurnitureLeather, double _width) {
-        super(_width, _length, _color);
-        super.setPlateNumber(_plateNumber);
-        super.setSerialNumber(_serialNumber);
-        super.setManufacture(_manufacturer);
-        super.setManufactureDate(_manufactureDate);
-        super.setGearType(_gearType);
         this.engine = _engine;
         this.chairNumber = _chairNumber;
         this.isFurnitureLeather = _isFurnitureLeather;
+        this.plateNumber=_plateNumber;
+        this.serialNumber=_serialNumber;
+        this.manufacture=_manufacturer;
+        this.manufactureDate=_manufactureDate;
+        this.gearType=_gearType;
+        this.width=_width;
+        this.length=_length;
+        this.color=_color;
+
 }
     @Override
     public Engine getEngine() {
@@ -58,6 +61,6 @@ public class Car extends Vehicle {
         System.out.println("Manufacture Date: " + (sdf.format(getManufactureDate())));
         System.out.println("Gear Type: " + getGearType());
         System.out.println("Engine: ");
-        getEngine().print();
+        engine.print();
     }
 }

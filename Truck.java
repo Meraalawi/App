@@ -6,17 +6,20 @@ public class Truck extends Vehicle {
     private double fullWeight;
     Engine engine;
 
-    public Truck(String plateNumber, String serialNumber, Color color, String manufacturer, Date manufactureDate,
-    GearType gearType, double length, Engine engine, double fullWeight, double freeWeight, double width) {
-    super(width, length, color);
-    setPlateNumber(plateNumber);
-    setSerialNumber(serialNumber);
-    setManufacture(manufacturer);
-    setManufactureDate(manufactureDate);
-    setGearType(gearType);
-    this.engine = engine;
-    this.fullWeight = fullWeight;
-    this.freeWeight = freeWeight;
+    public Truck(String _plateNumber, String _serialNumber, Color _color, String _manufacturer, Date _manufactureDate,
+    GearType _gearType, double _length, Engine _engine, double _fullWeight, double _freeWeight, double _width) {
+        this.engine = _engine;
+        this.fullWeight = _fullWeight;
+        this.freeWeight = _freeWeight;
+        this.plateNumber=_plateNumber;
+        this.serialNumber=_serialNumber;
+        this.manufacture=_manufacturer;
+        this.manufactureDate=_manufactureDate;
+        this.gearType=_gearType;
+        this.width=_width;
+        this.length=_length;
+        this.color=_color;
+
     }
     static Scanner scanner = new Scanner(System.in);
 
@@ -67,12 +70,6 @@ public class Truck extends Vehicle {
         System.out.println("Manufacture Date: " + getManufactureDate());
         System.out.println("Gear Type: " + getGearType());
         System.out.println("Engine: ");
-        if (engine != null) {
-            System.out.println("Engine:");
-            engine.print();
-        } else {
-            System.out.println("Engine details are not available.");
-        }
-    
+        engine.print();    
     }
 }

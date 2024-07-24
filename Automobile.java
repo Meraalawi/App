@@ -1,33 +1,14 @@
 import java.util.Date;
 
 public class Automobile {
-    private String manufacture;
-    private Date manufactureDate;
-    private Engine engine;
-    private String plateNumber;
-    private FuelType fuelType;
-    private GearType gearType;
-    private String serialNumber;
+    protected String manufacture;
+    protected Date manufactureDate;
+    protected Engine engine;
+    protected String plateNumber;
+    protected FuelType fuelType;
+    protected GearType gearType;
+    protected String serialNumber;
 
-    public Automobile() {
-        this.manufacture = null;
-        this.manufactureDate = new Date();
-        this.engine = null;
-        this.plateNumber = null;
-        this.fuelType = null;
-        this.gearType = null;
-        this.serialNumber = null;
-    }
-
-    public Automobile(String ـmanufacture, Date ـmanufactureDate, Engine ـengine, String ـplateNumber, FuelType ـfuelType, GearType ـgearType, String ـserialNumber) {
-        this.manufacture = ـmanufacture;
-        this.manufactureDate = ـmanufactureDate;
-        this.engine = ـengine;
-        this.plateNumber = ـplateNumber;
-        this.fuelType = ـfuelType;
-        this.gearType = ـgearType;
-        this.serialNumber = ـserialNumber;
-    }
 
     public String getManufacture() {
         return manufacture;

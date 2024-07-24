@@ -1,14 +1,8 @@
 class Vehicle extends Automobile {
-    private double width;
-    private double length;
-    private Color color;
+    protected  double width;
+    protected  double length;
+    protected Color color;
 
-    public Vehicle(double _width, double _length, Color _color) {
-        super();
-        this.width = _width;
-        this.length = _length;
-        this.color = _color;
-    }
     public double getWidth() {
         return width;
     }

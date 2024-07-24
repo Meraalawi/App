@@ -9,12 +9,18 @@ public class Motorcycle extends Automobile {
     private Color color; 
 
 
-    public Motorcycle(String plateNumber, String serialNumber, Color color, String manufacturer, Date manufactureDate,
-        GearType gearType, double length, Engine engine, double tireDiameter) {
-        super(manufacturer, manufactureDate, engine, plateNumber, null, gearType, serialNumber);
-        this.length = length;
-        this.engine = engine;
-        this.tireDiameter = tireDiameter;
+    public Motorcycle(String _plateNumber, String _serialNumber, Color _color, String _manufacturer, Date _manufactureDate,
+        GearType _gearType, double _length, Engine _engine, double _tireDiameter) {
+        this.engine = _engine;
+        this.tireDiameter = _tireDiameter;
+        this.plateNumber=_plateNumber;
+        this.serialNumber=_serialNumber;
+        this.manufacture=_manufacturer;
+        this.manufactureDate=_manufactureDate;
+        this.gearType=_gearType;
+        this.length=_length;
+        this.color=_color;
+
 }
 static Scanner scanner = new Scanner(System.in);
 
@@ -72,8 +78,7 @@ static Scanner scanner = new Scanner(System.in);
         System.out.println("Gear Type: " + getGearType());
         System.out.println("tireDiameter: " + tireDiameter);
         System.out.println("Length: " + length);
-
         System.out.println("Engine: ");
-        getEngine().print();
+        engine.print();
     }
 }
