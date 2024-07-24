@@ -78,11 +78,12 @@ public class VehicleManager  {
         Date manufactureDate = getDateInput("Enter manufacture date (yyyy-MM-dd): ");
         GearType gearType = GearType.getGearTypeFromInput();
         double length = getLength();
-        double width =  getWidth(listChoice);
-        switch (listChoice) {
+
+            switch (listChoice) {
             case 1 -> {
                 int chairNumber = getChairNumber();
                 boolean isFurnitureLeather = parseBooleanInput();
+                double width = getWidth();
                 Car newCar = new Car(plateNumber, serialNumber, color, manufacturer, manufactureDate, gearType, length, engine, chairNumber, isFurnitureLeather, width);
                 ((ArrayList<Car>) automobileMap.get(listChoice)).add(newCar);
                 System.out.println("Car added successfully.");
@@ -91,6 +92,7 @@ public class VehicleManager  {
             case 2 -> {
                 double fullWeight = Truck.getValidWeight("Enter full Weight capacity: ");
                 double freeWeight = Truck.getValidWeight("Enter free Weight capacity: ");
+                double width = getWidth();
                 Truck newTruck = new Truck(plateNumber, serialNumber, color, manufacturer, manufactureDate, gearType, length, engine, fullWeight, freeWeight, width);
                 ((ArrayList<Truck>) (automobileMap.get(listChoice))).add(newTruck);
                 System.out.println("Truck added successfully.");
@@ -228,7 +230,7 @@ public class VehicleManager  {
             case 8 -> car.setEngine(addEngineDetails());
             case 9 -> car.setChairNumber(getChairNumber());
             case 10 -> car.setIsFurnitureLeather(parseBooleanInput());
-            case 11 -> car.setWidth(getWidth(1));
+            case 11 -> car.setWidth(getWidth());
             default -> System.out.println("Invalid choice.");
         }
     }
@@ -260,7 +262,7 @@ public class VehicleManager  {
             case 8 -> truck.setEngine(addEngineDetails());
             case 9 -> truck.setFullWeight(Truck.getValidWeight("Enter full Weight capacity: "));
             case 10 -> truck.setFreeWeight(Truck.getValidWeight("Enter free Weight capacity: "));
-            case 11 -> truck.setWidth(getWidth(2));
+            case 11 -> truck.setWidth(getWidth());
             default -> System.out.println("Invalid choice.");
         }
     }
@@ -320,13 +322,14 @@ public class VehicleManager  {
         } while (!serialNumber.matches("^[A-Za-z0-9]{6,20}$"));
         return serialNumber;
     }
-    public  double getWidth(int listChoice) {
+    public double getWidth() {
         double width = 0.0;
-        if (listChoice == 1 || listChoice == 2) {
+        while (true) {
             System.out.print("Enter width: ");
             if (scanner.hasNextDouble()) {
                 width = scanner.nextDouble();
                 scanner.nextLine(); 
+                break; 
             } else {
                 System.out.println("Invalid input. Please enter a valid number.");
                 scanner.nextLine(); 
@@ -334,7 +337,7 @@ public class VehicleManager  {
         }
         return width;
     }
-    public  int getChairNumber() {
+        public  int getChairNumber() {
         int chairNumber = 0;
         
 
