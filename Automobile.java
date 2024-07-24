@@ -42,14 +42,6 @@ public class Automobile {
         this.plateNumber = plateNumber;
     }
 
-    public FuelType getFuelType() {
-        return fuelType;
-    }
-
-    public void setFuelType(FuelType fuelType) {
-        this.fuelType = fuelType;
-    }
-
     public GearType getGearType() {
         return gearType;
     }

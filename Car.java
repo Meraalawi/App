@@ -4,7 +4,6 @@ import java.util.Date;
 public class Car extends Vehicle {
     private int chairNumber;
     private boolean isFurnitureLeather;
-    private Engine engine;
 
     public Car(String _plateNumber, String _serialNumber, Color _color, String _manufacturer, Date _manufactureDate,
     GearType _gearType, double _length, Engine _engine, int _chairNumber, boolean _isFurnitureLeather, double _width) {
