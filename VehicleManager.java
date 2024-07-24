@@ -306,9 +306,9 @@ public class VehicleManager  {
     public  String getPlateNumber() {
         String plateNumber;
         do {
-            System.out.print("Enter plate number (first letter + up to 5 digits): ");
+            System.out.print("Enter plate number (first letter + digits): ");
             plateNumber = scanner.next();
-        } while (!plateNumber.matches("^[A-Za-z]\\d{1,5}$"));
+        } while (!plateNumber.matches("^[A-Za-z]\\d{1,7}$"));
         return plateNumber;
     }
 
