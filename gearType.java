@@ -1,6 +1,8 @@
+
+import java.io.Serializable;
 import java.util.Scanner;
 
-enum GearType {
+enum GearType implements Serializable {
     NOT_DEFINE,
     NORMAL,
     AUTOMATIC;

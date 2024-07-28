@@ -1,6 +1,8 @@
+
+import java.io.Serializable;
 import java.util.Scanner;
 
-enum FuelType {
+enum FuelType implements Serializable {
     NOT_DEFINE,
     DIESEL,
     GASOLINE,

@@ -1,6 +1,8 @@
+
+import java.io.Serializable;
 import java.util.Scanner;
 
-enum Color {
+enum Color implements Serializable {
     NOT_DEFINE,
     RED,
     WHITE,
@@ -25,7 +27,7 @@ enum Color {
                     return Color.values()[choice];
                 }
             } else {
-                scanner.next(); 
+                scanner.next();
             }
             System.out.println("Invalid choice. Please try again.");
         }
