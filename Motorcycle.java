@@ -1,11 +1,12 @@
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
-public class Motorcycle extends Automobile {
+public class Motorcycle extends Automobile implements Serializable {
+    private static final long serialVersionUID = 1L; 
     private double tireDiameter;
     private double length;
-    Engine engine;
     private Color color; 
 
 
@@ -23,6 +24,15 @@ public class Motorcycle extends Automobile {
 
 }
 static Scanner scanner = new Scanner(System.in);
+    @Override
+    public Engine getEngine() {
+        return engine;
+    }
+
+    @Override
+    public void setEngine(Engine engine) {
+        this.engine = engine;
+    }
 
     public double getTireDiameter() {
         return tireDiameter;

@@ -1,10 +1,10 @@
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import  java.util.Scanner;
 
-public class Engine {
-
-    
+public class Engine implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String manufacture;
     private Date manufactureDate;
     private String model;

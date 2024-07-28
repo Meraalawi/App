@@ -1,10 +1,11 @@
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Scanner;
 
-public class Truck extends Vehicle {
+public class Truck extends Vehicle  implements Serializable {
+    private static final long serialVersionUID = 1L;
     private double freeWeight;
     private double fullWeight;
-    Engine engine;
 
     public Truck(String _plateNumber, String _serialNumber, Color _color, String _manufacturer, Date _manufactureDate,
     GearType _gearType, double _length, Engine _engine, double _fullWeight, double _freeWeight, double _width) {
@@ -22,6 +23,16 @@ public class Truck extends Vehicle {
 
     }
     static Scanner scanner = new Scanner(System.in);
+    
+    @Override
+    public Engine getEngine() {
+        return engine;
+    }
+
+    @Override
+    public void setEngine(Engine engine) {
+        this.engine = engine;
+    }
 
     public double getFreeWeight() {
         return this.freeWeight;

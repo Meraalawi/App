@@ -1,7 +1,9 @@
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Car extends Vehicle {
+public class Car extends Vehicle implements Serializable {
+    private static final long serialVersionUID = 1L; // Unique identifier for serialization
     private int chairNumber;
     private boolean isFurnitureLeather;
 

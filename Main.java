@@ -1,8 +1,8 @@
 public class Main {
     public static void main(String[] args) {
         VehicleManager manager = new VehicleManager();
-        manager.loadVehicleData("vehicle_data.ser");
+        manager.loadVehicleData("/Users/harriharri/Desktop/App/vehicle_data.txt");
         manager.start();
-        manager.saveVehicleData("vehicle_data.ser");
+        manager.saveVehicleData("vehicle_data.txt");
     }
     }
