@@ -1,3 +1,8 @@
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -7,7 +12,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 
-public class VehicleManager  {
+public class VehicleManager implements java.io.Serializable {
     private final Map<Integer, Object> automobileMap = new HashMap<>();
     private final Scanner scanner = new Scanner(System.in);
 
@@ -16,8 +21,26 @@ public class VehicleManager  {
         automobileMap.put(2, new ArrayList<Truck>());
         automobileMap.put(3, new ArrayList<Motorcycle>());
     }
-
-    public void start() {
+    public void saveVehicleData(String vehicleData) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(vehicleData))) {
+            oos.writeObject(automobileMap);
+            System.out.println("Vehicle data saved successfully.");
+        } catch (IOException ex) {
+            System.out.println("Error saving vehicle data: " + ex.getMessage());
+        }
+        
+    }
+    public void loadVehicleData(String vehicleData) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(vehicleData))) {
+            @SuppressWarnings("unchecked")
+            Map<Integer, Object> loadedMap = (Map<Integer, Object>) ois.readObject();
+            automobileMap.clear();
+            automobileMap.putAll(loadedMap);
+            System.out.println("Vehicle data loaded successfully.");
+        } catch (IOException | ClassNotFoundException ex) {
+            System.out.println("Error loading vehicle data: " + ex.getMessage());
+        }
+    }    public void start() {
         while (true) {
             System.out.println("Choose a list to work with:");
             System.out.println("1. Car list");
@@ -406,8 +429,6 @@ public String getManufacturer() {
     } while (!manufacturer.matches("^[a-zA-Z ]{1,50}$"));
     return manufacturer;
 }
-
-
 public boolean parseBooleanInput() {
         String input;
         while (true) {
