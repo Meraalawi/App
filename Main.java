@@ -3,6 +3,6 @@ public class Main {
         VehicleManager manager = new VehicleManager();
         manager.loadVehicleData("/Users/harriharri/Desktop/App/vehicle_data.txt");
         manager.start();
-        manager.saveVehicleData("vehicle_data.txt");
+        manager.saveVehicleData("/Users/harriharri/Desktop/App/vehicle_data.txt");
     }
-    }
+}
