@@ -21,8 +21,9 @@ public class VehicleManager implements java.io.Serializable {
         automobileMap.put(2, new ArrayList<Truck>());
         automobileMap.put(3, new ArrayList<Motorcycle>());
     }
-    public void saveVehicleData(String vehicleData) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(vehicleData))) {
+    String filename = "vehicle_data.txt";
+    public void saveVehicleData(String filename) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
             oos.writeObject(automobileMap);
             System.out.println("Vehicle data saved successfully.");
         } catch (IOException ex) {
@@ -30,8 +31,8 @@ public class VehicleManager implements java.io.Serializable {
         }
         
     }
-    public void loadVehicleData(String vehicleData) {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(vehicleData))) {
+    public void loadVehicleData(String filename) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
             @SuppressWarnings("unchecked")
             Map<Integer, Object> loadedMap = (Map<Integer, Object>) ois.readObject();
             automobileMap.clear();
