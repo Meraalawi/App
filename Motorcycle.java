@@ -1,5 +1,11 @@
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -8,6 +14,7 @@ public class Motorcycle extends Automobile implements Serializable {
     private double tireDiameter;
     private double length;
     private Color color; 
+    private static final ArrayList<Motorcycle> motorcycleList = new ArrayList<>();
 
 
     public Motorcycle(String _plateNumber, String _serialNumber, Color _color, String _manufacturer, Date _manufactureDate,
@@ -90,5 +97,67 @@ static Scanner scanner = new Scanner(System.in);
         System.out.println("Length: " + length);
         System.out.println("Engine: ");
         engine.print();
+    }
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        try {
+            out.defaultWriteObject();
+            out.writeObject(color);
+            out.writeDouble(length);
+            out.writeDouble(tireDiameter);
+            out.writeObject(serialNumber);
+            out.writeObject(plateNumber);
+            out.writeObject(manufacture);
+            out.writeObject(manufactureDate);
+            out.writeObject(gearType.toString());
+            out.writeObject(engine);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        try {
+            in.defaultReadObject();
+            color = (Color) in.readObject();
+            length = in.readDouble();
+            tireDiameter = in.readDouble();
+            serialNumber = (String) in.readObject();
+            plateNumber = (String) in.readObject();
+            manufacture = (String) in.readObject();
+            manufactureDate = (Date) in.readObject();
+            gearType = GearType.valueOf((String) in.readObject());
+            engine = (Engine) in.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+@SuppressWarnings("unchecked")
+    public void loadMotorcycleArrayList() {
+        String filename = "C:/Users/harriharri/Desktop/App/motorcycle_data.txt"; // Adjust path as needed
+        try (FileInputStream fileInputStream = new FileInputStream(filename);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+            motorcycleList.clear(); // Clear current list before loading
+            motorcycleList.addAll((ArrayList<Motorcycle>) objectInputStream.readObject());
+            System.out.println("Motorcycle data loaded successfully.");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error loading motorcycle data: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    public void saveMotorcycleArrayList() throws IOException {
+        String filename = "C:/Users/harriharri/Desktop/App/motorcycle_data.txt"; // Adjust path as needed
+        try (FileOutputStream fileOutputStream = new FileOutputStream(filename);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
+            objectOutputStream.writeObject(motorcycleList);
+            objectOutputStream.flush();
+            System.out.println("Motorcycle data saved successfully.");
+        } catch (IOException e) {
+            System.out.println("Error saving motorcycle data: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public static ArrayList<Motorcycle> getMotorcycleList() {
+        return motorcycleList;
     }
 }

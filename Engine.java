@@ -1,5 +1,11 @@
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import  java.util.Scanner;
 
@@ -13,7 +19,7 @@ public class Engine implements Serializable {
     private FuelType fuelType;
 
     private static final Scanner scanner = new Scanner(System.in);
-
+    private static final ArrayList<Engine> engineList = new ArrayList<>();
 public Engine(String manufacture, Date manufactureDate, String model, int capacity, int cylinder, FuelType fuelType) {
         this.manufacture = manufacture;
         this.manufactureDate = manufactureDate;
@@ -118,4 +124,52 @@ public Engine(String manufacture, Date manufactureDate, String model, int capaci
         System.out.println("Cylinders: " + cylinder);
         System.out.println("Fuel Type: " + fuelType);
     }
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject(); // Write default fields
+        out.writeObject(manufacture); // Serialize custom fields
+        out.writeObject(manufactureDate);
+        out.writeObject(model);
+        out.writeInt(capacity);
+        out.writeInt(cylinder);
+        out.writeObject(fuelType); // Assuming FuelType is Serializable
+    }
+    
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject(); // Read default fields
+        manufacture = (String) in.readObject(); // Deserialize custom fields
+        manufactureDate = (Date) in.readObject();
+        model = (String) in.readObject();
+        capacity = in.readInt();
+        cylinder = in.readInt();
+        fuelType = (FuelType) in.readObject(); // Assuming FuelType is Serializable
+    }
+    public void loadEngineArrayList() {
+        String filename = "C:/Users/harriharri/Desktop/App/engine_data.txt"; // Adjust path as needed
+        try (FileInputStream fileInputStream = new FileInputStream(filename);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+            engineList.clear(); 
+            engineList.addAll((ArrayList<Engine>) objectInputStream.readObject());
+            System.out.println("Engine data loaded successfully.");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error loading engine data: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    public void saveEngineArrayList() throws IOException {
+        String filename = "C:/Users/harriharri/Desktop/App/engine_data.txt"; // Adjust path as needed
+        try (FileOutputStream fileOutputStream = new FileOutputStream(filename);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
+            objectOutputStream.writeObject(engineList);
+            objectOutputStream.flush();
+            System.out.println("Engine data saved successfully.");
+        } catch (IOException e) {
+            System.out.println("Error saving engine data: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public static ArrayList<Engine> getEngineList() {
+        return engineList;
+    }
 }
+

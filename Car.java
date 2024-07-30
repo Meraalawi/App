@@ -1,4 +1,5 @@
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -125,6 +126,25 @@ public class Car extends Vehicle implements Serializable {
         } catch (Exception exception) {
             exception.printStackTrace();
         }
+    }
+    @SuppressWarnings("unchecked")
+    public void loadCarArrayList() {
+        String filename = "C:/Users/harriharri/Desktop/App/vehicle_data.txt"; 
+        try (FileInputStream fileInputStream = new FileInputStream(filename);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+
+            carList.clear(); 
+            carList.addAll((ArrayList<Car>) objectInputStream.readObject());
+            System.out.println("Car data loaded successfully.");
+
+        } catch (IOException | ClassNotFoundException exception) {
+            System.out.println("Error loading car data: " + exception.getMessage());
+            exception.printStackTrace();
+        }
+    }
+
+    public static ArrayList<Car> getCarList() {
+        return carList;
     }
 
 }

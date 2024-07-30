@@ -1,3 +1,4 @@
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -13,15 +14,17 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class VehicleManager implements java.io.Serializable {
+
     private final Map<Integer, Object> automobileMap = new HashMap<>();
     private final Scanner scanner = new Scanner(System.in);
-
+private static final long serialVersionUID = 1L;
     public VehicleManager() {
         automobileMap.put(1, new ArrayList<Car>());
         automobileMap.put(2, new ArrayList<Truck>());
         automobileMap.put(3, new ArrayList<Motorcycle>());
     }
-    String filename = "vehicle_data.txt";
+    String filename = "/Users/harriharri/Desktop/App/vehicle_data.txt";
+
     public void saveVehicleData(String filename) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
             oos.writeObject(automobileMap);
@@ -29,8 +32,9 @@ public class VehicleManager implements java.io.Serializable {
         } catch (IOException ex) {
             System.out.println("Error saving vehicle data: " + ex.getMessage());
         }
-        
+
     }
+
     public void loadVehicleData(String filename) {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
             @SuppressWarnings("unchecked")
@@ -41,7 +45,9 @@ public class VehicleManager implements java.io.Serializable {
         } catch (IOException | ClassNotFoundException ex) {
             System.out.println("Error loading vehicle data: " + ex.getMessage());
         }
-    }    public void start() {
+    }
+
+    public void start() {
         while (true) {
             System.out.println("Choose a list to work with:");
             System.out.println("1. Car list");
@@ -76,10 +82,14 @@ public class VehicleManager implements java.io.Serializable {
             scanner.nextLine();
 
             switch (operationChoice) {
-                case 1 -> addVehicle(listChoice);
-                case 2 -> searchVehicle(listChoice);
-                case 3 -> deleteVehicle(listChoice);
-                case 4 -> modifyVehicle(listChoice);
+                case 1 ->
+                    addVehicle(listChoice);
+                case 2 ->
+                    searchVehicle(listChoice);
+                case 3 ->
+                    deleteVehicle(listChoice);
+                case 4 ->
+                    modifyVehicle(listChoice);
                 case 5 -> {
                     return; // Go back to choose another list
                 }
@@ -103,7 +113,7 @@ public class VehicleManager implements java.io.Serializable {
         GearType gearType = GearType.getGearTypeFromInput();
         double length = getLength();
 
-            switch (listChoice) {
+        switch (listChoice) {
             case 1 -> {
                 int chairNumber = getChairNumber();
                 boolean isFurnitureLeather = parseBooleanInput();
@@ -127,7 +137,8 @@ public class VehicleManager implements java.io.Serializable {
                 ((ArrayList<Motorcycle>) automobileMap.get(listChoice)).add(newMotorcycle);
                 System.out.println("Motorcycle added successfully.");
             }
-            default -> System.out.println("Invalid vehicle type..try again");
+            default ->
+                System.out.println("Invalid vehicle type..try again");
         }
     }
 
@@ -244,18 +255,30 @@ public class VehicleManager implements java.io.Serializable {
         int choice = scanner.nextInt();
         scanner.nextLine();
         switch (choice) {
-            case 1 -> car.setPlateNumber(getPlateNumber());
-            case 2 -> car.setSerialNumber(getSerialNumber());
-            case 3 -> car.setColor(Color.getColorFromInput());
-            case 4 -> car.setManufacture(getManufacturer());
-            case 5 -> car.setManufactureDate(getDateInput("Enter manufacture date (yyyy-MM-dd): "));
-            case 6 -> car.setGearType(GearType.getGearTypeFromInput());
-            case 7 -> car.setLength(getLength());
-            case 8 -> car.setEngine(addEngineDetails());
-            case 9 -> car.setChairNumber(getChairNumber());
-            case 10 -> car.setIsFurnitureLeather(parseBooleanInput());
-            case 11 -> car.setWidth(getWidth());
-            default -> System.out.println("Invalid choice.");
+            case 1 ->
+                car.setPlateNumber(getPlateNumber());
+            case 2 ->
+                car.setSerialNumber(getSerialNumber());
+            case 3 ->
+                car.setColor(Color.getColorFromInput());
+            case 4 ->
+                car.setManufacture(getManufacturer());
+            case 5 ->
+                car.setManufactureDate(getDateInput("Enter manufacture date (yyyy-MM-dd): "));
+            case 6 ->
+                car.setGearType(GearType.getGearTypeFromInput());
+            case 7 ->
+                car.setLength(getLength());
+            case 8 ->
+                car.setEngine(addEngineDetails());
+            case 9 ->
+                car.setChairNumber(getChairNumber());
+            case 10 ->
+                car.setIsFurnitureLeather(parseBooleanInput());
+            case 11 ->
+                car.setWidth(getWidth());
+            default ->
+                System.out.println("Invalid choice.");
         }
     }
 
@@ -276,18 +299,30 @@ public class VehicleManager implements java.io.Serializable {
         int choice = scanner.nextInt();
         scanner.nextLine();
         switch (choice) {
-            case 1 -> truck.setPlateNumber(getPlateNumber());
-            case 2 -> truck.setSerialNumber(getSerialNumber());
-            case 3 -> truck.setColor(Color.getColorFromInput());
-            case 4 -> truck.setManufacture(getManufacturer());
-            case 5 -> truck.setManufactureDate(getDateInput("Enter manufacture date (yyyy-MM-dd): "));
-            case 6 -> truck.setGearType(GearType.getGearTypeFromInput());
-            case 7 -> truck.setLength(getLength());
-            case 8 -> truck.setEngine(addEngineDetails());
-            case 9 -> truck.setFullWeight(Truck.getValidWeight("Enter full Weight capacity: "));
-            case 10 -> truck.setFreeWeight(Truck.getValidWeight("Enter free Weight capacity: "));
-            case 11 -> truck.setWidth(getWidth());
-            default -> System.out.println("Invalid choice.");
+            case 1 ->
+                truck.setPlateNumber(getPlateNumber());
+            case 2 ->
+                truck.setSerialNumber(getSerialNumber());
+            case 3 ->
+                truck.setColor(Color.getColorFromInput());
+            case 4 ->
+                truck.setManufacture(getManufacturer());
+            case 5 ->
+                truck.setManufactureDate(getDateInput("Enter manufacture date (yyyy-MM-dd): "));
+            case 6 ->
+                truck.setGearType(GearType.getGearTypeFromInput());
+            case 7 ->
+                truck.setLength(getLength());
+            case 8 ->
+                truck.setEngine(addEngineDetails());
+            case 9 ->
+                truck.setFullWeight(Truck.getValidWeight("Enter full Weight capacity: "));
+            case 10 ->
+                truck.setFreeWeight(Truck.getValidWeight("Enter free Weight capacity: "));
+            case 11 ->
+                truck.setWidth(getWidth());
+            default ->
+                System.out.println("Invalid choice.");
         }
     }
 
@@ -306,16 +341,26 @@ public class VehicleManager implements java.io.Serializable {
         int choice = scanner.nextInt();
         scanner.nextLine();
         switch (choice) {
-            case 1 -> motorcycle.setPlateNumber(getPlateNumber());
-            case 2 -> motorcycle.setSerialNumber(getSerialNumber());
-            case 3 -> motorcycle.setColor(Color.getColorFromInput());
-            case 4 -> motorcycle.setManufacture(getManufacturer());
-            case 5 -> motorcycle.setManufactureDate(getDateInput("Enter manufacture date (yyyy-MM-dd): "));
-            case 6 -> motorcycle.setGearType(GearType.getGearTypeFromInput());
-            case 7 -> motorcycle.setLength(getLength());
-            case 8 -> motorcycle.setEngine(addEngineDetails());
-            case 9 -> motorcycle.setTireDiameter(Motorcycle.getValidTireDiameter());
-            default -> System.out.println("Invalid choice.");
+            case 1 ->
+                motorcycle.setPlateNumber(getPlateNumber());
+            case 2 ->
+                motorcycle.setSerialNumber(getSerialNumber());
+            case 3 ->
+                motorcycle.setColor(Color.getColorFromInput());
+            case 4 ->
+                motorcycle.setManufacture(getManufacturer());
+            case 5 ->
+                motorcycle.setManufactureDate(getDateInput("Enter manufacture date (yyyy-MM-dd): "));
+            case 6 ->
+                motorcycle.setGearType(GearType.getGearTypeFromInput());
+            case 7 ->
+                motorcycle.setLength(getLength());
+            case 8 ->
+                motorcycle.setEngine(addEngineDetails());
+            case 9 ->
+                motorcycle.setTireDiameter(Motorcycle.getValidTireDiameter());
+            default ->
+                System.out.println("Invalid choice.");
         }
     }
 
@@ -329,7 +374,8 @@ public class VehicleManager implements java.io.Serializable {
         FuelType fuelType = FuelType.getFuelTypeFromInput();
         return new Engine(manufacture, manufactureDate, model, capacity, cylinder, fuelType);
     }
-    public  String getPlateNumber() {
+
+    public String getPlateNumber() {
         String plateNumber;
         do {
             System.out.print("Enter plate number (first letter + digits): ");
@@ -338,7 +384,7 @@ public class VehicleManager implements java.io.Serializable {
         return plateNumber;
     }
 
-    public  String getSerialNumber() {
+    public String getSerialNumber() {
         String serialNumber;
         do {
             System.out.print("Enter serial number (6 or more characters): ");
@@ -346,91 +392,94 @@ public class VehicleManager implements java.io.Serializable {
         } while (!serialNumber.matches("^[A-Za-z0-9]{6,20}$"));
         return serialNumber;
     }
+
     public double getWidth() {
         double width = 0.0;
         while (true) {
             System.out.print("Enter width: ");
             if (scanner.hasNextDouble()) {
                 width = scanner.nextDouble();
-                scanner.nextLine(); 
-                break; 
+                scanner.nextLine();
+                break;
             } else {
                 System.out.println("Invalid input. Please enter a valid number.");
-                scanner.nextLine(); 
+                scanner.nextLine();
             }
         }
         return width;
     }
-        public  int getChairNumber() {
+
+    public int getChairNumber() {
         int chairNumber = 0;
-        
 
         System.out.print("Enter chair number (between 2 and 9): ");
-            if (scanner.hasNextInt()) {
-                chairNumber = scanner.nextInt();
-                if (chairNumber >= 2 && chairNumber <= 9) {
-                } else {
-                    System.out.println("Chair number must be between 2 and 9.");
-                }
-            } else {
-                System.out.println("Invalid input. Please enter a number between 2 and 9.");
-                scanner.next(); 
-            }
-        return chairNumber;
-    }    
-
-    public  Date getDateInput(String promptMessage) {
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    dateFormat.setLenient(false);
-    Date parsedDate = null;
-
-    while (parsedDate == null) {
-        try {
-            System.out.print(promptMessage);
-            String dateStr = scanner.next();
-            parsedDate = dateFormat.parse(dateStr);
-
-            Date minDate = dateFormat.parse("1950-01-01");
-            if (parsedDate.compareTo(minDate) < 0) {
-                System.out.println("Manufacture date must be 1950 or later.");
-                parsedDate = null;
-            }
-        } catch (ParseException e) {
-            System.out.println("Invalid date format. Please use yyyy-MM-dd.");
-        }
-
-        if (parsedDate == null) {
-            System.out.print("Enter manufacture date (yyyy-MM-dd): ");
-        }
-    }
-
-    return parsedDate;
-}
-public int getLength() {
-    int length;
-    while (true) {
-        System.out.print("Enter a valid length (1-31): "); 
         if (scanner.hasNextInt()) {
-            length = scanner.nextInt();
-            if (length >= 1 && length <= 31) { 
-                return length;
+            chairNumber = scanner.nextInt();
+            if (chairNumber >= 2 && chairNumber <= 9) {
+            } else {
+                System.out.println("Chair number must be between 2 and 9.");
             }
         } else {
-            scanner.next(); 
+            System.out.println("Invalid input. Please enter a number between 2 and 9.");
+            scanner.next();
         }
-        System.out.println("Invalid number. Please enter a positive number between 1 and 31.");
+        return chairNumber;
     }
-}
 
-public String getManufacturer() {
-    String manufacturer;
-    do {
-        System.out.print("Enter manufacturer name (letters only, length 1-50): ");
-        manufacturer = scanner.nextLine().trim();
-    } while (!manufacturer.matches("^[a-zA-Z ]{1,50}$"));
-    return manufacturer;
-}
-public boolean parseBooleanInput() {
+    public Date getDateInput(String promptMessage) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false);
+        Date parsedDate = null;
+
+        while (parsedDate == null) {
+            try {
+                System.out.print(promptMessage);
+                String dateStr = scanner.next();
+                parsedDate = dateFormat.parse(dateStr);
+
+                Date minDate = dateFormat.parse("1950-01-01");
+                if (parsedDate.compareTo(minDate) < 0) {
+                    System.out.println("Manufacture date must be 1950 or later.");
+                    parsedDate = null;
+                }
+            } catch (ParseException e) {
+                System.out.println("Invalid date format. Please use yyyy-MM-dd.");
+            }
+
+            if (parsedDate == null) {
+                System.out.print("Enter manufacture date (yyyy-MM-dd): ");
+            }
+        }
+
+        return parsedDate;
+    }
+
+    public int getLength() {
+        int length;
+        while (true) {
+            System.out.print("Enter a valid length (1-31): ");
+            if (scanner.hasNextInt()) {
+                length = scanner.nextInt();
+                if (length >= 1 && length <= 31) {
+                    return length;
+                }
+            } else {
+                scanner.next();
+            }
+            System.out.println("Invalid number. Please enter a positive number between 1 and 31.");
+        }
+    }
+
+    public String getManufacturer() {
+        String manufacturer;
+        do {
+            System.out.print("Enter manufacturer name (letters only, length 1-50): ");
+            manufacturer = scanner.nextLine().trim();
+        } while (!manufacturer.matches("^[a-zA-Z ]{1,50}$"));
+        return manufacturer;
+    }
+
+    public boolean parseBooleanInput() {
         String input;
         while (true) {
             System.out.print("Is furniture leather? (t/f): ");
@@ -442,9 +491,9 @@ public boolean parseBooleanInput() {
                 case "f" -> {
                     return false;
                 }
-                default -> System.out.println("Invalid input. Please enter 't' for true or 'f' for false.");
+                default ->
+                    System.out.println("Invalid input. Please enter 't' for true or 'f' for false.");
             }
         }
     }
 }
-
